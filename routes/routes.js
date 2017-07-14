@@ -9,7 +9,7 @@ var fs = require('fs');
 // Users who are not logged in can see these routes
 
 router.get('/', function(req, res, next) {
-  res.render('reed');
+  res.render('home');
 });
 
 router.get('/location', function(req, res) {
