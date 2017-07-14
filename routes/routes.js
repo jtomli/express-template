@@ -96,8 +96,6 @@ router.get('/results', function(req, res, next) {
   res.render('list', {restaurants: sampleRestaurants});
 });
 
-router.get('/location', function(req, res) {})
-
 ///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
 
 router.use(function(req, res, next) {
