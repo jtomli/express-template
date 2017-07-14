@@ -11,7 +11,7 @@ var bodyParser = require('body-parser');
 // var connect = process.env.MONGODB_URI;
 
 // var REQUIRED_ENV = "SECRET MONGODB_URI".split(" ");
-
+//
 // REQUIRED_ENV.forEach(function(el) {
 //   if (!process.env[el]){
 //     console.error("Missing required env var " + el);
@@ -21,7 +21,7 @@ var bodyParser = require('body-parser');
 
 // mongoose.connect(connect);
 
-// var models = require('./models');
+var models = require('./models');
 
 var routes = require('./routes/routes');
 // var auth = require('./routes/auth');

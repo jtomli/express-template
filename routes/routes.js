@@ -5,6 +5,7 @@ var User = models.User;
 var request = require('request');
 var fs = require('fs');
 var NodeGeocoder = require('node-geocoder');
+var formResult = require('../output')
 
 //////////////////////////////// PUBLIC ROUTES ////////////////////////////////
 // Users who are not logged in can see these routes
@@ -13,9 +14,16 @@ router.get('/', function(req, res, next) {
   res.render('home', {googleApi: process.env.GOOGLEPLACES});
 });
 
+router.get('/form', function(req, res, next) {
+  res.render('venueForm');
+})
+
+router.post('/form', function(req, res) {
+  console.log(req.body)
+})
+
 router.post('/info', function(req, res) {
   console.log(req.body);
-
   var options = {
     provider: 'google',
     httpAdapter: 'https', // Default
@@ -29,9 +37,21 @@ router.post('/info', function(req, res) {
     var long = res[0].longitude;
     console.log(res, lat, long);
   });
+  // this gets the information from the form
+  //(type=req.body.type location= req.body.location radius= req.body.radius * 10000)
+  // we need to change the address into latitude/longitude
+  // give this to an ajax request
+  // push the object that comes back into several arrays in a data file [name,address,phone,ratings, opening time, closing time, photos, website]
+  //this data file is picked up when you go to results >>>>>>> 25 c8c37efe858bdc740148a49eaa2590d053773e
 })
 
 router.get('/results', function(req, res, next) {
+  // var sampleRestaurants = [];
+  // for(var i = 0; i < formResult.length; i++) {
+  //   var category = formResult[i];
+  //
+  // }
+
   var sampleRestaurants = [
     {
       name: "Julia's Kitchen",
@@ -69,15 +89,6 @@ router.get('/location', function(req, res) {
       })
     }
   })
-  // $(document).ready($.ajax({
-  //   url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key${process.env.GOOGLEPLACES}=&location=39.9519,75.1739&radius=16000`,
-  //   success: function(result) {
-  //     console.log(result);
-  //   },
-  //   error: function(error) {
-  //     console.log(error);
-  //   }
-  // }))
 
 })
 
