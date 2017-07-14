@@ -13,7 +13,26 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/results', function(req, res, next) {
-  res.render('list');
+  var sampleRestaurants = [
+    {
+      name: "Julia's Kitchen",
+      address: '1200 Red Barn Road, Lower Gwynedd, PA 19002',
+      phone: '215-718-5073',
+      rating: '5 stars',
+      hours: '10 to 6'
+    },
+    {
+      name: "Reed's Kitchen",
+      address: '329 12th Street, SOMA, CA 94103',
+      phone: '345-333-2345',
+      rating: '1 star',
+      hours: '10 to 6'
+    },
+
+  ]
+  res.render('list', {
+    restaurants: sampleRestaurants
+  });
 });
 
 router.get('/location', function(req, res) {
