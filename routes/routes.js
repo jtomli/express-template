@@ -14,11 +14,11 @@ router.get('/', function(req, res, next) {
   res.render('home', {googleApi: process.env.GOOGLEPLACES});
 });
 
-router.get('/form', function(req, res, next) {
-  res.render('venueForm');
+router.get('/wishlist', function(req, res, next) {
+  res.render('wishlist');
 })
 
-router.post('/form', function(req, res) {
+router.post('/wishlist', function(req, res) {
   console.log(req.body)
 })
 
@@ -32,11 +32,34 @@ router.post('/info', function(req, res) {
 
   var geocoder = NodeGeocoder(options);
   // Using callback
+  let lat;
+  let long;
   geocoder.geocode(req.body.location, function(err, res) {
-    var lat = res[0].latitude;
-    var long = res[0].longitude;
+     lat = res[0].latitude;
+     long = res[0].longitude;
     console.log(res, lat, long);
   });
+
+  console.log('radius', (parseInt(req.body.radius) * 1609))
+
+  request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=${lat},${long}&radius=&type=${req.body.type}`, function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var obj = JSON.parse(body);
+      var printObj = {
+        name: [],
+        price_level: [],
+        rating: []
+      };
+      obj.results.forEach(item => {
+        printObj.name.push(item.name);
+        printObj.price_level.push(item.price_level);
+        printObj.rating.push(item.rating);
+      })
+      fs.writeFile('output.json', JSON.stringify(printObj, null, 4), function(err) {
+        console.log('File successfully written! - Check your project directory for the output.json file');
+      })
+    }
+  })
   // this gets the information from the form
   //(type=req.body.type location= req.body.location radius= req.body.radius * 10000)
   // we need to change the address into latitude/longitude
@@ -71,24 +94,6 @@ router.get('/results', function(req, res, next) {
 });
 
 router.get('/location', function(req, res) {
-  request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=39.951883,-75.173872&radius=50000&type=library`, function(error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var obj = JSON.parse(body);
-      var printObj = {
-        name: [],
-        price_level: [],
-        rating: []
-      };
-      obj.results.forEach(item => {
-        printObj.name.push(item.name);
-        printObj.price_level.push(item.price_level);
-        printObj.rating.push(item.rating);
-      })
-      fs.writeFile('output.json', JSON.stringify(printObj, null, 4), function(err) {
-        console.log('File successfully written! - Check your project directory for the output.json file');
-      })
-    }
-  })
 
 })
 
