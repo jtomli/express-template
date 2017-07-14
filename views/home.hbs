@@ -9,8 +9,9 @@
       </div>
       <div class="row center">
         <form id="form" method="post" action="/info">
+          <input type="hidden" name="place" id="latitude" value="hey">
           <div class="input-field col s6">
-            <select name="venue-type">
+            <select name="type">
               <option disabled selected>Choose your venue</option>
               <option>Bar</option>
               <option>Restaurant</option>
@@ -21,38 +22,22 @@
             </select>
             <label>Venue</label>
           </div>
-          <div class="input-field col s6">
-            <input type="text" name="location">
+          <div id="locationField" class="input-field col s6">
+            <input type="text" name="location" id="autocomplete">
             <label>Location</label>
           </div>
           <div class="input-field col s6">
             <select name="radius">
               <option disabled selected>Choose your radius</option>
-              <option>5 miles</option>
-              <option>10 miles</option>
-              <option>20 miles</option>
+              <option value='5'>5 miles</option>
+              <option value='10'>10 miles</option>
+              <option value ='20'>20 miles</option>
             </select>
             <label>Radius</label>
           </div>
           <button class="btn waves-effect waves-light brown" type="submit">Submit
               <i class="material-icons right">send</i>
-          </button> -->
-
-          <!-- <a class='dropdown-button btn brown' data-activates='dropdown1'>Venue</a>
-          <select id='dropdown1' class='dropdown-content' name='venue-type'>
-              <li><a>Bar</a></li>
-              <li><a>Restaurant</a></li>
-          </select>
-
-          <a class='dropdown-button btn brown' href='#' data-activates='dropdown3'>Radius</a>
-          <ul id='dropdown3' class='dropdown-content' name='radius'>
-              <li><a>5 miles</a></li>
-              <li><a>10 miles</a></li>
-              <li><a>20 miles</a></li>
-          </ul>
-          <button class="btn waves-effect waves-light brown" type="submit" name="action">Submit
-              <i class="material-icons right">send</i>
-          </button> -->
+          </button>
         </form>
       </div>
       <br><br>
@@ -82,7 +67,7 @@
           <h2 class="center brown-text"><i class="material-icons">email</i></h2>
           <h5 class="center">User Experience</h5>
 
-          <p class="light">2. Skip the cold calls and hassle! Because seriously who's got time for that? Instead simply search and filter through our curated list of venues, explore photos and read reviews to find your next setting.</p>
+          <p class="light">2. Get the inside scoop on your favorite venues because at Festiv we love transparency. That means no more treasure hunting for fair prices and you can say goodbye to uncomfortable price negotiations.</p>
         </div>
       </div>
 
@@ -138,3 +123,7 @@
   </div>
   <div class="parallax"><img src="../images/champ.jpeg" alt="Unsplashed background img 3"></div>
 </div>
+<script>
+  var input = document.getElementById('autocomplete');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+</script>
