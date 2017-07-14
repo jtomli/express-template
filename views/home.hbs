@@ -9,8 +9,9 @@
       </div>
       <div class="row center">
         <form id="form" method="post" action="/info">
+          <input type="hidden" name="place" id="latitude" value="hey">
           <div class="input-field col s6">
-            <select name="venue-type">
+            <select name="type">
               <option disabled selected>Choose your venue</option>
               <option>Bar</option>
               <option>Restaurant</option>
@@ -21,8 +22,8 @@
             </select>
             <label>Venue</label>
           </div>
-          <div class="input-field col s6">
-            <input type="text" name="location">
+          <div id="locationField" class="input-field col s6">
+            <input type="text" name="location" id="autocomplete">
             <label>Location</label>
           </div>
           <div class="input-field col s6">
@@ -36,7 +37,7 @@
           </div>
           <button class="btn waves-effect waves-light brown" type="submit">Submit
               <i class="material-icons right">send</i>
-          </button> -->
+          </button>
 
           <!-- <a class='dropdown-button btn brown' data-activates='dropdown1'>Venue</a>
           <select id='dropdown1' class='dropdown-content' name='venue-type'>
@@ -138,3 +139,7 @@
   </div>
   <div class="parallax"><img src="../images/champ.jpeg" alt="Unsplashed background img 3"></div>
 </div>
+<script>
+  var input = document.getElementById('autocomplete');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+</script>

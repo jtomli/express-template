@@ -4,6 +4,7 @@ var models = require('../models');
 var User = models.User;
 var request = require('request');
 var fs = require('fs');
+var NodeGeocoder = require('node-geocoder');
 
 //////////////////////////////// PUBLIC ROUTES ////////////////////////////////
 // Users who are not logged in can see these routes
@@ -14,6 +15,20 @@ router.get('/', function(req, res, next) {
 
 router.post('/info', function(req, res) {
   console.log(req.body);
+
+  var options = {
+    provider: 'google',
+    httpAdapter: 'https', // Default
+    apiKey: process.env.GOOGLEPLACES
+  };
+
+  var geocoder = NodeGeocoder(options);
+  // Using callback
+  geocoder.geocode(req.body.location, function(err, res) {
+    var lat = res[0].latitude;
+    var long = res[0].longitude;
+    console.log(res, lat, long);
+  });
 })
 
 router.get('/results', function(req, res, next) {
@@ -31,7 +46,8 @@ router.get('/results', function(req, res, next) {
       rating: '1 star',
       hours: '10 to 6'
     }
-  ]res.render('list', {restaurants: sampleRestaurants});
+  ];
+  res.render('list', {restaurants: sampleRestaurants});
 });
 
 router.get('/location', function(req, res) {
