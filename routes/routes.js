@@ -12,6 +12,10 @@ router.get('/', function(req, res, next) {
   res.render('home');
 });
 
+router.get('/results', function(req, res, next) {
+  res.render('list');
+});
+
 router.get('/location', function(req, res) {
   request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=39.951883,-75.173872&radius=50000&type=library`, function(error, response, body) {
     if (!error && response.statusCode == 200) {
