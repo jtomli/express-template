@@ -4,6 +4,7 @@ var models = require('../models');
 var User = models.User;
 var request = require('request');
 var fs = require('fs');
+var formResult = require('../output')
 
 //////////////////////////////// PUBLIC ROUTES ////////////////////////////////
 // Users who are not logged in can see these routes
@@ -17,6 +18,12 @@ router.post('/info', function(req, res) {
 })
 
 router.get('/results', function(req, res, next) {
+  // var sampleRestaurants = [];
+  // for(var i = 0; i < formResult.length; i++) {
+  //   var category = formResult[i];
+  //
+  // }
+
   var sampleRestaurants = [
     {
       name: "Julia's Kitchen",
@@ -31,7 +38,8 @@ router.get('/results', function(req, res, next) {
       rating: '1 star',
       hours: '10 to 6'
     }
-  ]res.render('list', {restaurants: sampleRestaurants});
+  ]
+  res.render('list', {restaurants: sampleRestaurants});
 });
 
 router.get('/location', function(req, res) {
