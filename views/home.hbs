@@ -1,3 +1,4 @@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{googleApi}}&libraries=places"></script>
 <div id="index-banner" class="parallax-container">
   <div class="section no-pad-bot">
     <div class="container">
@@ -7,26 +8,52 @@
         <h5 class="header col s12 light">We help you find venues for events</h5>
       </div>
       <div class="row center">
-      <a class='dropdown-button btn brown' href='#' data-activates='dropdown1'>Venue</a>
-      <ul id='dropdown1' class='dropdown-content'>
-          <li><a href="#!">Bar</a></li>
-          <li><a href="#!">Restaurant</a></li>
-      </ul>
-      <a class='dropdown-button btn brown' href='#' data-activates='dropdown2'>Location</a>
-      <ul id='dropdown2' class='dropdown-content'>
-          <li><a href="#!">Bar</a></li>
-          <li><a href="#!">Restaurant</a></li>
-      </ul>
-      <a class='dropdown-button btn brown' href='#' data-activates='dropdown3'>Radius</a>
-      <ul id='dropdown3' class='dropdown-content'>
-          <li><a href="#!">5 miles</a></li>
-          <li><a href="#!">10 miles</a></li>
-          <li><a href="#!">20 miles</a></li>
+        <form id="form" method="post" action="/info">
+          <div class="input-field col s6">
+            <select name="venue-type">
+              <option disabled selected>Choose your venue</option>
+              <option>Bar</option>
+              <option>Restaurant</option>
+              <option>Night club</option>
+              <option>Museum</option>
+              <option>Library</option>
+              <option>Art gallery</option>
+            </select>
+            <label>Venue</label>
+          </div>
+          <div class="input-field col s6">
+            <input type="text" name="location">
+            <label>Location</label>
+          </div>
+          <div class="input-field col s6">
+            <select name="radius">
+              <option disabled selected>Choose your radius</option>
+              <option>5 miles</option>
+              <option>10 miles</option>
+              <option>20 miles</option>
+            </select>
+            <label>Radius</label>
+          </div>
+          <button class="btn waves-effect waves-light brown" type="submit">Submit
+              <i class="material-icons right">send</i>
+          </button> -->
 
-      </ul>
-      <button class="btn waves-effect waves-light brown" type="submit" name="action">Submit
-          <i class="material-icons right">send</i>
-      </button>
+          <!-- <a class='dropdown-button btn brown' data-activates='dropdown1'>Venue</a>
+          <select id='dropdown1' class='dropdown-content' name='venue-type'>
+              <li><a>Bar</a></li>
+              <li><a>Restaurant</a></li>
+          </select>
+
+          <a class='dropdown-button btn brown' href='#' data-activates='dropdown3'>Radius</a>
+          <ul id='dropdown3' class='dropdown-content' name='radius'>
+              <li><a>5 miles</a></li>
+              <li><a>10 miles</a></li>
+              <li><a>20 miles</a></li>
+          </ul>
+          <button class="btn waves-effect waves-light brown" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+          </button> -->
+        </form>
       </div>
       <br><br>
 
@@ -55,7 +82,8 @@
           <h2 class="center brown-text"><i class="material-icons">email</i></h2>
           <h5 class="center">User Experience Focused</h5>
 
-          <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+          <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms
+            allow for a more unified user experience.</p>
         </div>
       </div>
 
@@ -91,7 +119,9 @@
       <div class="col s12 center">
         <h3><i class="mdi-content-send brown-text"></i></h3>
         <h4>Contact Us</h4>
-        <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+        <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra
+          ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices
+          erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
       </div>
     </div>
 

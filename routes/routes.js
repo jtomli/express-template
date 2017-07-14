@@ -9,8 +9,12 @@ var fs = require('fs');
 // Users who are not logged in can see these routes
 
 router.get('/', function(req, res, next) {
-  res.render('home');
+  res.render('home', {googleApi: process.env.GOOGLEPLACES});
 });
+
+router.post('/info', function(req, res) {
+  console.log(req.body);
+})
 
 router.get('/location', function(req, res) {
   request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=39.951883,-75.173872&radius=50000&type=library`, function(error, response, body) {
