@@ -55,6 +55,7 @@ router.get('/location', function(req, res) {
       })
     }
   })
+
   // $(document).ready($.ajax({
   //   url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key${process.env.GOOGLEPLACES}=&location=39.9519,75.1739&radius=16000`,
   //   success: function(result) {
@@ -65,6 +66,10 @@ router.get('/location', function(req, res) {
   //   }
   // }))
 
+})
+
+router.get('/results/:result', function(req, res) {
+  res.render('venue');
 })
 
 ///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
