@@ -4,6 +4,7 @@ var models = require('../models');
 var User = models.User;
 var request = require('request');
 var fs = require('fs');
+var formResult = require('../output')
 
 //////////////////////////////// PUBLIC ROUTES ////////////////////////////////
 // Users who are not logged in can see these routes
@@ -11,6 +12,14 @@ var fs = require('fs');
 router.get('/', function(req, res, next) {
   res.render('home', {googleApi: process.env.GOOGLEPLACES});
 });
+
+router.get('/form', function(req, res, next){
+    res.render('venueForm');
+})
+
+router.post('/form', function(req, res){
+    console.log(req.body)
+})
 
 router.post('/info', function(req, res) {
   console.log(req.body);
@@ -24,6 +33,12 @@ router.post('/info', function(req, res) {
 })
 
 router.get('/results', function(req, res, next) {
+  // var sampleRestaurants = [];
+  // for(var i = 0; i < formResult.length; i++) {
+  //   var category = formResult[i];
+  //
+  // }
+
   var sampleRestaurants = [
     {
       name: "Julia's Kitchen",
