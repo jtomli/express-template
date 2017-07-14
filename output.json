@@ -1,0 +1,300 @@
+[
+    {
+        "name": "Field House",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 3.4,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Frankford Hall",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.4,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Union Transfer",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.7,
+        "type": [
+            "bar",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Ladder 15",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 3.5,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Del Frisco's Double Eagle Steak House",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.5,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "El Rey",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.2,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Philadelphia Brewing Co",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.6,
+        "type": [
+            "bar",
+            "liquor_store",
+            "restaurant",
+            "food",
+            "store",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "JG Domestic",
+        "hours": {
+            "open_now": false,
+            "weekday_text": []
+        },
+        "rating": 4.2,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "The Capital Grille",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.4,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Amis",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.4,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Zama",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.2,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "City Tap House",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Brauhaus Schmitz",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.4,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "McGillin's Olde Ale House",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.2,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "XFINITY Live! Philadelphia",
+        "rating": 4.1,
+        "type": [
+            "bar",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Urban Saloon",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 3.7,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "El Vez",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.2,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Tavern on Broad",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 3.6,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Maggiano's",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.1,
+        "type": [
+            "restaurant",
+            "bar",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Lucky Strike Philadelphia",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 3.7,
+        "type": [
+            "bowling_alley",
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    }
+]

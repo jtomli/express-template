@@ -4,7 +4,7 @@ var models = require('../models');
 var User = models.User;
 var request = require('request');
 var fs = require('fs');
-var formResult = require('../output')
+var NodeGeocoder = require('node-geocoder');
 
 //////////////////////////////// PUBLIC ROUTES ////////////////////////////////
 // Users who are not logged in can see these routes
@@ -13,9 +13,16 @@ router.get('/', function(req, res, next) {
   res.render('home', {googleApi: process.env.GOOGLEPLACES});
 });
 
+router.get('/wishlist', function(req, res, next) {
+  res.render('wishlist');
+})
+
+router.post('/wishlist', function(req, res) {
+  console.log(req.body)
+})
+
 router.post('/info', function(req, res) {
   console.log(req.body);
-
   var options = {
     provider: 'google',
     httpAdapter: 'https', // Default
@@ -85,34 +92,11 @@ router.get('/results', function(req, res, next) {
       rating: '1 star',
       hours: '10 to 6'
     }
-  ]
+  ];
   res.render('list', {restaurants: sampleRestaurants});
 });
 
-router.get('/location', function(req, res) {}) ======= router.get('/location', function(req, res) {
-  request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=39.951883,-75.173872&radius=50000&type=library`, function(error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var obj = JSON.parse(body);
-      var venues = [];
-      obj.results.forEach(item => {
-        venues.push({name: item.name, price_level: item.price_level, rating: item.rating})
-      })
-      fs.writeFile('output.json', JSON.stringify(venues, null, 4), function(err) {
-        console.log('File successfully written! - Check your project directory for the output.json file');
-      })
-    }
-  })
-  // $(document).ready($.ajax({
-  //   url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key${process.env.GOOGLEPLACES}=&location=39.9519,75.1739&radius=16000`,
-  //   success: function(result) {
-  //     console.log(result);
-  //   },
-  //   error: function(error) {
-  //     console.log(error);
-  //   }
-  // }))
-
-})
+router.get('/location', function(req, res) {})
 
 ///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
 
