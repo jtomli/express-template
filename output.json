@@ -1,68 +1,76 @@
-{
-    "name": [
-        "Free Library of Philadelphia",
-        "Delaware County Community College - Marple Campus",
-        "Bucks County Community College",
-        "Abington Free Library",
-        "Delaware Art Museum",
-        "Chemical Heritage Foundation",
-        "Historical Society of Pennsylvania",
-        "Landman Library",
-        "Talbot Research Library",
-        "Ludington Library",
-        "Franklin Institute Library",
-        "Regional Foundation Center",
-        "Medical Library",
-        "Montgomery County - Norristown Public Library",
-        "Historic Library",
-        "Access & Literacy Services",
-        "Bucks County Comm College Library",
-        "Brandywine Hundred Library",
-        "Francis Harvey Green (FHG) Library",
-        "Samuel Paley Library"
-    ],
-    "price_level": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-    ],
-    "rating": [
-        4.4,
-        3.9,
-        3.4,
-        4.8,
-        4.4,
-        4.6,
-        5,
-        4,
-        null,
-        4.7,
-        4.7,
-        null,
-        null,
-        4.1,
-        null,
-        null,
-        null,
-        4.3,
-        4.6,
-        4
-    ]
-}
+[
+    {
+        "name": "Free Library of Philadelphia",
+        "rating": 4.4
+    },
+    {
+        "name": "Delaware County Community College - Marple Campus",
+        "rating": 3.9
+    },
+    {
+        "name": "Bucks County Community College",
+        "rating": 3.4
+    },
+    {
+        "name": "Abington Free Library",
+        "rating": 4.8
+    },
+    {
+        "name": "Delaware Art Museum",
+        "rating": 4.4
+    },
+    {
+        "name": "Chemical Heritage Foundation",
+        "rating": 4.6
+    },
+    {
+        "name": "Historical Society of Pennsylvania",
+        "rating": 5
+    },
+    {
+        "name": "Landman Library",
+        "rating": 4
+    },
+    {
+        "name": "Talbot Research Library"
+    },
+    {
+        "name": "Ludington Library",
+        "rating": 4.7
+    },
+    {
+        "name": "Franklin Institute Library",
+        "rating": 4.7
+    },
+    {
+        "name": "Regional Foundation Center"
+    },
+    {
+        "name": "Medical Library"
+    },
+    {
+        "name": "Montgomery County - Norristown Public Library",
+        "rating": 4.1
+    },
+    {
+        "name": "Historic Library"
+    },
+    {
+        "name": "Access & Literacy Services"
+    },
+    {
+        "name": "Bucks County Comm College Library"
+    },
+    {
+        "name": "Brandywine Hundred Library",
+        "rating": 4.3
+    },
+    {
+        "name": "Francis Harvey Green (FHG) Library",
+        "rating": 4.6
+    },
+    {
+        "name": "Samuel Paley Library",
+        "rating": 4
+    }
+]

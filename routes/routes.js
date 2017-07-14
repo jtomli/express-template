@@ -46,17 +46,11 @@ router.get('/location', function(req, res) {
   request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=39.951883,-75.173872&radius=50000&type=library`, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       var obj = JSON.parse(body);
-      var printObj = {
-        name: [],
-        price_level: [],
-        rating: []
-      };
+      var venues =[];
       obj.results.forEach(item => {
-        printObj.name.push(item.name);
-        printObj.price_level.push(item.price_level);
-        printObj.rating.push(item.rating);
+        venues.push({name: item.name, price_level: item.price_level, rating: item.rating})
       })
-      fs.writeFile('output.json', JSON.stringify(printObj, null, 4), function(err) {
+      fs.writeFile('output.json', JSON.stringify(venues, null, 4), function(err) {
         console.log('File successfully written! - Check your project directory for the output.json file');
       })
     }
