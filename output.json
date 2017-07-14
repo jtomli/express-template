@@ -1,68 +1,305 @@
-{
-    "name": [
-        "Free Library of Philadelphia",
-        "Delaware County Community College - Marple Campus",
-        "Bucks County Community College",
-        "Abington Free Library",
-        "Delaware Art Museum",
-        "Chemical Heritage Foundation",
-        "Historical Society of Pennsylvania",
-        "Landman Library",
-        "Talbot Research Library",
-        "Ludington Library",
-        "Franklin Institute Library",
-        "Regional Foundation Center",
-        "Medical Library",
-        "Montgomery County - Norristown Public Library",
-        "Historic Library",
-        "Access & Literacy Services",
-        "Bucks County Comm College Library",
-        "Brandywine Hundred Library",
-        "Francis Harvey Green (FHG) Library",
-        "Samuel Paley Library"
-    ],
-    "price_level": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-    ],
-    "rating": [
-        4.4,
-        3.9,
-        3.4,
-        4.8,
-        4.4,
-        4.6,
-        5,
-        4,
-        null,
-        4.7,
-        4.7,
-        null,
-        null,
-        4.1,
-        null,
-        null,
-        null,
-        4.3,
-        4.6,
-        4
-    ]
-}
+[
+    {
+        "name": "Field House",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 3.4,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Tavern on Broad",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 3.6,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Lucky Strike Philadelphia",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 3.7,
+        "type": [
+            "bowling_alley",
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Time",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.2,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Recess Lounge",
+        "hours": {
+            "open_now": false,
+            "weekday_text": []
+        },
+        "rating": 3,
+        "type": [
+            "bar",
+            "night_club",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "The Roxxy",
+        "hours": {
+            "open_now": false,
+            "weekday_text": []
+        },
+        "rating": 3,
+        "type": [
+            "night_club",
+            "bar",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "North Bowl",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.2,
+        "type": [
+            "bowling_alley",
+            "bar",
+            "night_club",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Howl at the Moon Philadelphia",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4,
+        "type": [
+            "bar",
+            "night_club",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "The Trestle Inn",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.4,
+        "type": [
+            "bar",
+            "night_club",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Tinto",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.2,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Devon Seafood Grill",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.1,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Penthouse Club",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.1,
+        "type": [
+            "bar",
+            "night_club",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "VALANNI",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.2,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Helium Comedy Club - Philadelphia",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.2,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Yakitori Boy",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.1,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Woody's in Philadelphia",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 3.6,
+        "type": [
+            "bar",
+            "night_club",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Delilah's",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 2.9,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Dolphin Tavern",
+        "hours": {
+            "open_now": false,
+            "weekday_text": []
+        },
+        "rating": 4.4,
+        "type": [
+            "night_club",
+            "bar",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Voyeur Nightclub",
+        "hours": {
+            "open_now": false,
+            "weekday_text": []
+        },
+        "rating": 3.6,
+        "type": [
+            "night_club",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Club Risque' Philadelphia",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 3.6,
+        "type": [
+            "bar",
+            "night_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    }
+]

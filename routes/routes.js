@@ -31,41 +31,45 @@ router.post('/info', function(req, res) {
   };
 
   var geocoder = NodeGeocoder(options);
-  // Using callback
   let lat;
   let long;
-  geocoder.geocode(req.body.location, function(err, res) {
-     lat = res[0].latitude;
-     long = res[0].longitude;
-    console.log(res, lat, long);
+  geocoder.geocode(req.body.location).then(function(response) {
+    lat = response[0].latitude;
+    long = response[0].longitude;
+    console.log(response, lat, long);
+  }).then(function() {
+    let radius = parseInt(req.body.radius) * 1609;
+    let type = req.body.type.split(" ").join("_").toLowerCase();
+    request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=${lat},${long}&radius=${radius}&type=${type}`, function(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var obj = JSON.parse(body);
+        var venues = [];
+        obj.results.forEach(item => {
+          venues.push({
+            name: item.name,
+            address: item.formatted_address,
+            phone: item.formatted_phone_number,
+            hours: item.opening_hours,
+            rating: item.rating,
+            type: item.types
+          })
+        });
+        fs.writeFile('output.json', JSON.stringify(venues, null, 4), function(err) {
+          console.log('File successfully written! - Check your project directory for the output.json file');
+        })
+        //res.render('list');
+      }
+    })
+  }).catch(function(err) {
+    console.log(err);
   });
 
-  console.log('radius', (parseInt(req.body.radius) * 1609))
-
-  request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=${lat},${long}&radius=&type=${req.body.type}`, function(error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var obj = JSON.parse(body);
-      var printObj = {
-        name: [],
-        price_level: [],
-        rating: []
-      };
-      obj.results.forEach(item => {
-        printObj.name.push(item.name);
-        printObj.price_level.push(item.price_level);
-        printObj.rating.push(item.rating);
-      })
-      fs.writeFile('output.json', JSON.stringify(printObj, null, 4), function(err) {
-        console.log('File successfully written! - Check your project directory for the output.json file');
-      })
-    }
-  })
   // this gets the information from the form
   //(type=req.body.type location= req.body.location radius= req.body.radius * 10000)
   // we need to change the address into latitude/longitude
   // give this to an ajax request
   // push the object that comes back into several arrays in a data file [name,address,phone,ratings, opening time, closing time, photos, website]
-  //this data file is picked up when you go to results >>>>>>> 25 c8c37efe858bdc740148a49eaa2590d053773e
+  //this data file is picked up when you go to results
 })
 
 router.get('/results', function(req, res, next) {
@@ -93,9 +97,7 @@ router.get('/results', function(req, res, next) {
   res.render('list', {restaurants: sampleRestaurants});
 });
 
-router.get('/location', function(req, res) {
-
-})
+router.get('/location', function(req, res) {})
 
 ///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
 
