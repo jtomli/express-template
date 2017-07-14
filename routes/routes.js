@@ -16,6 +16,24 @@ router.post('/info', function(req, res) {
   console.log(req.body);
 })
 
+router.get('/results', function(req, res, next) {
+  var sampleRestaurants = [
+    {
+      name: "Julia's Kitchen",
+      address: '1200 Red Barn Road, Lower Gwynedd, PA 19002',
+      phone: '215-718-5073',
+      rating: '5 stars',
+      hours: '10 to 6'
+    }, {
+      name: "Reed's Kitchen",
+      address: '329 12th Street, SOMA, CA 94103',
+      phone: '345-333-2345',
+      rating: '1 star',
+      hours: '10 to 6'
+    }
+  ]res.render('list', {restaurants: sampleRestaurants});
+});
+
 router.get('/location', function(req, res) {
   request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=39.951883,-75.173872&radius=50000&type=library`, function(error, response, body) {
     if (!error && response.statusCode == 200) {

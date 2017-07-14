@@ -1,0 +1,27 @@
+<div class="results-page">
+  <h1 style='padding: 10px'>Your results</h1>
+  <!-- use hbs #each to loop through results. just writing html for one result -->
+  <ul class="list-group">
+    {{#each restaurants}}
+    <li class="list-group-item">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5><a href="#!">{{this.name}}</a></h5>
+            <p>Here is a blurb about {{this.name}}, or possibly a photo. </p>
+          </div>
+          <div class="col l6 s12">
+            <h5>Info</h5>
+            <ul>
+              <li>Address: <a href="#!">{{this.address}} </a></li>
+              <li>Phone Number: {{this.phone}} </li>
+              <li>Rating: {{this.rating}} </li>
+              <li>Hours: {{this.hours}} </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+<div>
