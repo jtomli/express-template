@@ -12,6 +12,14 @@ router.get('/', function(req, res, next) {
   res.render('home', {googleApi: process.env.GOOGLEPLACES});
 });
 
+router.get('/form', function(req, res, next){
+    res.render('venueForm');
+})
+
+router.post('/form', function(req, res){
+    console.log(req.body)
+})
+
 router.post('/info', function(req, res) {
   console.log(req.body);
 })
@@ -31,7 +39,8 @@ router.get('/results', function(req, res, next) {
       rating: '1 star',
       hours: '10 to 6'
     }
-  ]res.render('list', {restaurants: sampleRestaurants});
+];
+res.render('list', {restaurants: sampleRestaurants});
 });
 
 router.get('/location', function(req, res) {
