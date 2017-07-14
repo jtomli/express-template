@@ -14,6 +14,13 @@ router.get('/', function(req, res, next) {
 
 router.post('/info', function(req, res) {
   console.log(req.body);
+  // this gets the information from the form
+  //(type=req.body.type location= req.body.location radius= req.body.radius * 10000)
+  // we need to change the address into latitude/longitude
+  // give this to an ajax request
+  // push the object that comes back into several arrays in a data file [name,address,phone,ratings, opening time, closing time, photos, website]
+  //this data file is picked up when you go to results
+
 })
 
 router.get('/results', function(req, res, next) {
@@ -31,7 +38,8 @@ router.get('/results', function(req, res, next) {
       rating: '1 star',
       hours: '10 to 6'
     }
-  ]res.render('list', {restaurants: sampleRestaurants});
+  ]
+  res.render('list', {restaurants: sampleRestaurants});
 });
 
 router.get('/location', function(req, res) {
