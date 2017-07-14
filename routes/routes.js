@@ -4,7 +4,6 @@ var models = require('../models');
 var User = models.User;
 var request = require('request');
 var fs = require('fs');
-var formResult = require('../output')
 
 //////////////////////////////// PUBLIC ROUTES ////////////////////////////////
 // Users who are not logged in can see these routes
@@ -89,7 +88,7 @@ router.get('/results', function(req, res, next) {
   res.render('list', {restaurants: sampleRestaurants});
 });
 
-router.get('/location', function(req, res) {}) ======= router.get('/location', function(req, res) {
+router.get('/location', function(req, res) {
   request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=39.951883,-75.173872&radius=50000&type=library`, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       var obj = JSON.parse(body);
@@ -102,7 +101,6 @@ router.get('/location', function(req, res) {}) ======= router.get('/location', f
       })
     }
   })
-
   // $(document).ready($.ajax({
   //   url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key${process.env.GOOGLEPLACES}=&location=39.9519,75.1739&radius=16000`,
   //   success: function(result) {
@@ -113,10 +111,6 @@ router.get('/location', function(req, res) {}) ======= router.get('/location', f
   //   }
   // }))
 
-})
-
-router.get('/results/:result', function(req, res) {
-  res.render('venue');
 })
 
 ///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
