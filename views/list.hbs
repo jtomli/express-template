@@ -25,7 +25,10 @@
             </ul>
           </div>
         </div>
-        <button class="btn"type="button" name="button">Add to MyVenues</button>
+        <form action="/cart" method="post">
+          <input type="hidden" name="venue" value={{this}}></input>
+          <button class="btn" type="submit" name="button">Add to MyVenues</button>
+        </form>
       </div>
     </li>
     {{/each}}

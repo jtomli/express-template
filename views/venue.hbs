@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <a href="/venue/{{this.name}}"><h3>{{this.name}}</h3></a>
+          <h3>{{venue.name}}</h3>
           <img src='{{this.link}}'>
         </div>
         <div class="col l6 s12">
@@ -21,7 +21,10 @@
           </ul>
         </div>
       </div>
-      <a class="btn">Add to MyVenues</a>
+      <form action="/cart" method="post">
+        <input type="hidden" name="venue" value={{venue}}></input>
+        <button class="btn" type="submit" name="button">Add to MyVenues</button>
+      </form>
     </div>
   </li>
 </ul>

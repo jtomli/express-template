@@ -100,9 +100,10 @@ router.get('/venue/:venueName', function(req, res) {
   })
 })
 
-router.get('/cart', function(req, res) {
+router.post('/cart', function(req, res) {
   User.findById(req.user.id, function(user) {
     console.log("user", user);
+    console.log(req.body.venue.name)
   })
 })
 
