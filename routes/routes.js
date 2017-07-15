@@ -85,13 +85,6 @@ router.post('/info', function(req, res) {
 });
 })
 
-router.get('/results', function(req, res, next) {
-
-  res.render('list', {venues: venues});
-  // get queries
-  //run shit ton of things you had in /post thingy
-  //render
-});
 
 ///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
 
