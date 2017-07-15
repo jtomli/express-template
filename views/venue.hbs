@@ -4,19 +4,29 @@
       <div class="row">
         <div class="col l6 s12">
           <h3>{{venue.name}}</h3>
-          <img src='{{this.link}}'>
+          <img src='{{venue.link}}'>
         </div>
         <div class="col l6 s12">
-          <h5>Info</h5>
           <ul>
             <li><b>Address: </b><a href="{{venue.url}}">{{venue.address}} </a></li>
             <li><b>Phone Number:</b> {{venue.phone}} </li>
             <li><b>Rating:</b> {{venue.rating}} </li>
             <li><b>Website:</b> <a href="{{venue.website}}">{{venue.website}} </a> </li>
             <li><b>Hours:</b>
-                {{#each venue.hours}}
-                  <p>{{this}}</p>
-                {{/each}}
+                <div style="padding: 5px">
+                  {{#each venue.hours}}
+                    <p>{{this}}</p>
+                  {{/each}}
+                </div>
+            </li>
+            <li>
+              <style>
+              #map {
+                height: 300px;
+                width: 75%;
+               }
+            </style>
+            <div id="map"></div>
             </li>
           </ul>
         </div>
@@ -27,3 +37,20 @@
     </div>
   </li>
 </ul>
+
+<script>
+      function initMap() {
+        var uluru = {lat: {{venue.lat}}, lng: {{venue.long}} };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPFVH1qlXHVgez8wct5uK0nFJd68NBSck&callback=initMap">
+    </script>

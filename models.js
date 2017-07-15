@@ -20,7 +20,12 @@ var venueSchema = mongoose.Schema({
   type: String,
   photos: Array,
   url: String,
-  website: String
+  website: String,
+  lat: Number,
+  long: Number,
+  hours: String,
+  type: String,
+  link: String
 });
 
 var cartSchema = mongoose.Schema({

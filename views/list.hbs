@@ -44,16 +44,17 @@
             <img src='{{this.link}}'>
           </div>
           <div class="col l6 s12">
-            <h5>Info</h5>
             <ul>
               <li><b>Address: </b><a href="{{this.url}}">{{this.address}} </a></li>
               <li><b>Phone Number:</b> {{this.phone}} </li>
               <li><b>Rating:</b> {{this.rating}} </li>
               <li><b>Website:</b> <a href="{{this.website}}">{{this.website}} </a> </li>
               <li><b>Hours:</b>
+                <div style="padding: 5px">
                   {{#each this.hours}}
                     <p>{{this}}</p>
                   {{/each}}
+                </div>
               </li>
             </ul>
           </div>
