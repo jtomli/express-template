@@ -82,6 +82,16 @@ router.post('/info', function(req, res) {
 });
 })
 
+router.get('/:venueid', function(req, res) {
+  var sampleVenue = {
+    name: "Julia's Kitchen",
+    address: "329 12th St",
+    rating: '4.5',
+    type: 'restaurant',
+  }
+  res.render('venue', {venue: sampleVenue})
+})
+
 
 ///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
 
