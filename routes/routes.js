@@ -6,6 +6,7 @@ var Venue = models.Venue;
 var request = require('request-promise');
 var fs = require('fs');
 var NodeGeocoder = require('node-geocoder');
+var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
 //////////////////////////////// PUBLIC ROUTES ////////////////////////////////
 // Users who are not logged in can see these routes
@@ -72,7 +73,9 @@ router.post('/info', function(req, res) {
             type: obj2.result.types,
             url: obj2.result.url,
             website: obj2.result.website,
-            link: 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + obj2.result.photos[0].photo_reference + '&key=' + process.env.GOOGLEPLACES
+            link: obj2.result.photos
+              ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + obj2.result.photos[0].photo_reference + '&key=' + process.env.GOOGLEPLACES
+              : ''
           })))
         }
         return Promise.all(venues)
@@ -115,7 +118,7 @@ router.post('/cart/:venueName', function(req, res) {
         Cart.findById(cart._id, function(err, foundCart) {
           cart.venues.push(venue);
           cart.save(function(err, savedCart) {
-            res.render('cart', {venues: user.cart.venues})
+            res.render('cart', {venues: user.cart.venues});
           })
         })
       }
@@ -130,21 +133,77 @@ router.get('/showCart', function(req, res) {
   })
 })
 
+router.post('/remove/:venueName', function(req, res) {
+  User.findById(req.user._id).populate('cart').exec(function(err, user) {
+    Cart.findById(user.cart._id, function(err, foundCart) {
+      let index;
+      foundCart.venues.forEach((venueObject, i) => {
+        if (venueObject.name === req.params.venueName) {
+          index = i;
+        }
+      })
+      foundCart.venues.splice(index, 1);
+      foundCart.save(function(err, savedCart) {
+        res.render('cart', {venues: savedCart});
+      })
+    })
+  })
+})
+
 router.get('/wishlist', function(req, res, next) {
   res.render('wishlist');
 })
 
-router.post('/wishlist', function(req, res) {})
+router.post('/wishlist', function(req, res) {
+  var request = sg.emptyRequest({
+    method: 'POST',
+    path: '/v3/mail/send',
+    body: {
+      personalizations: [
+        {
+          to: [
+            {
+              email: 'jtomli@seas.upenn.edu'
+            }
+          ],
+          'substitutions': {
+            '-businessName-': 'Good Parties Here',
+            '-clientName-': req.user.fname,
+            '-date-': req.body.date,
+            '-guestCount': req.body.guestCount
+          },
+          subject: 'Book your venue with Festiv!'
+        }, {
+          to: [
+            {
+              email: 'jtomli@seas.upenn.edu'
+            }
+          ],
+          'substitutions': {
+            '-businessName-': req.body.businessName,
+            '-clientName-': 'Jamie2',
+            '-date-': 'September 2, 2017',
+            '-guestCount': '200'
+          },
+          subject: 'Book your venue with Festiv!'
+        }
+      ],
+      from: {
+        email: 'test@example.com'
+      },
+      'template_id': process.env.TEMPLATE_ID
+    }
+  });
 
-// router.get('/:venueid', function(req, res) {
-//   var sampleVenue = {
-//     name: "Julia's Kitchen",
-//     address: "329 12th St",
-//     rating: '4.5',
-//     type: 'restaurant',
-//   }
-//   res.render('venue', {venue: sampleVenue})
-// })
+  sg.API(request, function(error, response) {
+    if (error) {
+      console.log('Error response received');
+    }
+    console.log(response.statusCode);
+    console.log(response.body);
+    console.log(response.headers);
+  });
+})
 
 ///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
 
