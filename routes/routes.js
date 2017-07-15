@@ -7,6 +7,7 @@ var request = require('request-promise');
 var fs = require('fs');
 var NodeGeocoder = require('node-geocoder');
 var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+const Handlebars = require('Handlebars');
 
 //////////////////////////////// PUBLIC ROUTES ////////////////////////////////
 // Users who are not logged in can see these routes
@@ -97,7 +98,6 @@ router.get('/refresh', function(req, res) {
 })
 
 router.get('/venue/:venueName', function(req, res) {
-
   var name = req.params.venueName;
   req.session.search.forEach(venue => {
     if (venue.name === name) {
@@ -144,7 +144,7 @@ router.post('/remove/:venueName', function(req, res) {
       })
       foundCart.venues.splice(index, 1);
       foundCart.save(function(err, savedCart) {
-        res.render('cart', {venues: savedCart});
+        res.render('cart', {venues: foundCart});
       })
     })
   })
@@ -155,54 +155,82 @@ router.get('/wishlist', function(req, res, next) {
 })
 
 router.post('/wishlist', function(req, res) {
-  var request = sg.emptyRequest({
-    method: 'POST',
-    path: '/v3/mail/send',
-    body: {
-      personalizations: [
-        {
-          to: [
-            {
-              email: 'jtomli@seas.upenn.edu'
-            }
-          ],
-          'substitutions': {
-            '-businessName-': 'Good Parties Here',
-            '-clientName-': req.user.fname,
-            '-date-': req.body.date,
-            '-guestCount': req.body.guestCount
-          },
-          subject: 'Book your venue with Festiv!'
-        }, {
-          to: [
-            {
-              email: 'jtomli@seas.upenn.edu'
-            }
-          ],
-          'substitutions': {
-            '-businessName-': req.body.businessName,
-            '-clientName-': 'Jamie2',
-            '-date-': 'September 2, 2017',
-            '-guestCount': '200'
-          },
-          subject: 'Book your venue with Festiv!'
-        }
-      ],
-      from: {
-        email: 'test@example.com'
-      },
-      'template_id': process.env.TEMPLATE_ID
+  //Cart.findById(req.user.cart, function(foundCart) {
+  // for (var i = 0; i < 1; i++) {
+  var nodemailer = require('nodemailer');
+
+  var content = `Hello from Festiv!\n
+    Our client, ${req.user.fname}, is interested in booking your venue for my upcoming event.
+    ${req.user.fname} would like to inquire about scheduling an event on ${req.body.date}
+    for ${req.body.hours} hours, for approximately ${req.body.guestCount} guests.
+    In terms of pricing, our client would prefer ${req.body.price}. Please let me know
+    of any packages or potential prices for the event.
+    \n
+    Looking forward to hearing back from you!\n\n
+    Best,
+    Festiv
+    festivspaces@gmail.com`;
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'festivspaces@gmail.com',
+      pass: 'bookfestiv6'
     }
   });
 
-  sg.API(request, function(error, response) {
+  var mailOptions = {
+    from: 'festivspaces@gmail.com',
+    to: 'jtomli@seas.upenn.edu',
+    subject: req.user.fname + " would like to book your venue!",
+    text: content
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
-      console.log('Error response received');
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
     }
-    console.log(response.statusCode);
-    console.log(response.body);
-    console.log(response.headers);
-  });
+    //  });
+    // var request = sg.emptyRequest({
+    //   method: 'POST',
+    //   path: '/v3/mail/send',
+    //   body: {
+    //     personalizations: [
+    //       {
+    //         to: [
+    //           {
+    //             email: cart.venues[i].email || 'jamie.tomlinson11@gmail.com'
+    //           }
+    //         ],
+    //         'substitutions': {
+    //           '-businessName-': cart.venues[i].name,
+    //           '-fname': req.user.fname,
+    //           '-date-': req.body.date,
+    //           '-guests': req.body.guestCount,
+    //           '-price': req.body.price
+    //         },
+    //         subject: req.user.fname + " would like to book your venue!"
+    //       }
+    //     ],
+    //     from: {
+    //       email: 'test@example.com'
+    //     },
+    //     'template_id': process.env.TEMPLATE_ID
+    //   }
+    // });
+    // sg.API(request, function(error, response) {
+    //   if (error) {
+    //     console.log('Error response received');
+    //   }
+    //   console.log(response.statusCode);
+    //   console.log(response.body);
+    //   console.log(response.headers);
+    // });
+    //  }
+    res.redirect('/');
+  })
+
 })
 
 ///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
