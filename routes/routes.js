@@ -45,32 +45,41 @@ router.post('/info', function(req, res) {
   }).then(function() {
     let radius = parseInt(req.body.radius) * 1609;
     let type = req.body.type.split(" ").join("_").toLowerCase();
-    console.log("reading api body");
-    return request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=${lat},${long}&radius=${radius}&type=${type}`).then(resp => JSON.parse(resp)).then(obj => {
-      console.log(obj);
-      placeId = [];
-      obj.results.forEach(item => {
-        placeId.push(item.place_id)
-      });
-      console.log('placeid', placeId);
-      for (var i = 0; i < placeId.length; i++) {
-        venues.push(request(`https://maps.googleapis.com/maps/api/place/details/json?key=${process.env.GOOGLEPLACES}&placeid=${placeId[i]}`).then(resp => JSON.parse(resp)).then(obj2 => ({
-          name: obj2.result.name,
-          address: obj2.result.formatted_address,
-          phone: obj2.result.formatted_phone_number,
-          photos: obj2.result.photos,
-          rating: obj2.result.rating,
-          type: obj2.result.types,
-          url: obj2.result.url
-        })))
-      }
-      console.log('venues', venues[1]);
-      return Promise.all(venues)
-    }).then(arrayOfResults => {
-      console.log("done!!!!!", arrayOfResults);
-      res.render('list', {venues: arrayOfResults});
-    }).catch(err => console.log("ERR", err))
-  }).catch(function(err) {
+    return request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=${lat},${long}&radius=${radius}&type=${type}`)
+    .then(resp => JSON.parse(resp))
+    .then(obj => {
+        placeId = [];
+        obj.results.forEach(item => {
+          placeId.push(item.place_id)
+        });
+
+        for (var i=0; i<placeId.length; i++){
+            venues.push(
+                request(`https://maps.googleapis.com/maps/api/place/details/json?key=${process.env.GOOGLEPLACES}&placeid=${placeId[i]}`)
+                .then(resp => JSON.parse(resp))
+                .then(obj2 => ({
+                  name: obj2.result.name,
+                  address: obj2.result.formatted_address,
+                //   phone: obj2.result.formatted_phone_number,
+                //   hours: obj2.result.opening_hours.weekday_text,
+                  photos: obj2.result.photos,
+                  rating: obj2.result.rating,
+                  type: obj2.result.types,
+                  url: obj2.result.url,
+                  website: obj2.result.website
+              })))
+        }
+        console.log('venues', venues[1]);
+
+        return Promise.all(venues)
+     })
+    .then(arrayOfResults => {
+          console.log("done!!!!!", arrayOfResults);
+          res.render('list',{venues: arrayOfResults});
+    })
+    .catch(err => console.log("ERR", err))
+})
+.catch(function(err) {
     console.log(err);
   });
 })

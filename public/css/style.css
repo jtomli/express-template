@@ -14,6 +14,7 @@ nav ul a, nav .brand-logo {
 
 p {
   line-height: 2rem;
+
 }
 
 .button-collapse {
@@ -57,4 +58,35 @@ p {
 
 footer.page-footer {
   margin: 0;
+}
+
+
+body {
+  min-height: 75rem;
+  padding-top: 6.5rem;
+  font: 14px "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+#h1tag {
+  color: white !important;
+
+}
+
+#h5tag {
+  color: #98FB98 !important;
+}
+
+/* #contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact {
+  width: 25%;
+  text-align: left;
+} */
+
+#firstimage {
+  filter: brightness(75%);
 }
