@@ -72,12 +72,6 @@ router.post('/info', function(req, res) {
 })
 
 router.get('/results', function(req, res, next) {
-  // var sampleRestaurants = [];
-  // for(var i = 0; i < formResult.length; i++) {
-  //   var category = formResult[i];
-  //
-  // }
-
   var sampleRestaurants = [
     {
       name: "Julia's Kitchen",
@@ -95,6 +89,8 @@ router.get('/results', function(req, res, next) {
   ];
   res.render('list', {restaurants: sampleRestaurants});
 });
+
+router.get('/venue/:venueId', function(req, res) {})
 
 ///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
 

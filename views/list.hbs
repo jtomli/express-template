@@ -7,7 +7,7 @@
       <div class="container">
         <div class="row">
           <div class="col l6 s12">
-            <h5><a href="#!">{{this.name}}</a></h5>
+            <h5><a href="/venue?name={{this.name}}">{{this.name}}</a></h5>
             <p>Here is a blurb about {{this.name}}, or possibly a photo. </p>
           </div>
           <div class="col l6 s12">
@@ -20,6 +20,7 @@
             </ul>
           </div>
         </div>
+        <button class="btn"type="button" name="button">Add to MyVenues</button>
       </div>
     </li>
     {{/each}}
