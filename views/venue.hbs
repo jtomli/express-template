@@ -21,8 +21,7 @@
           </ul>
         </div>
       </div>
-      <form action="/cart" method="post">
-        <input type="hidden" name="venue" value={{venue}}></input>
+      <form action="/cart/{{this.name}}" method="post">
         <button class="btn" type="submit" name="button">Add to MyVenues</button>
       </form>
     </div>

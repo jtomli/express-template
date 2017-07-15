@@ -1,17 +1,39 @@
-<div class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+<ul>
+  <li class="list-group-item">
+    <div class="container">
+      <!-- use hbs #each to loop through results. just writing html for one result -->
+      <ul class="list-group">
+        {{#each venues}}
+        <li class="list-group-item">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <a href="/venue/{{this.name}}"><h3>{{this.name}}</h3></a>
+                <img src='{{this.link}}'>
+              </div>
+              <div class="col l6 s12">
+                <h5>Info</h5>
+                <ul>
+                  <li><b>Address: </b><a href="{{this.url}}">{{this.address}} </a></li>
+                  <li><b>Phone Number:</b> {{this.phone}} </li>
+                  <li><b>Rating:</b> {{this.rating}} </li>
+                  <li><b>Website:</b> <a href="{{this.website}}">{{this.website}} </a> </li>
+                  <li><b>Hours:</b>
+                      {{#each this.hours}}
+                        <p>{{this}}</p>
+                      {{/each}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <form action="/remove/{{this.name}}" method="post">
+              <button class="btn" type="submit" name="button">Remove from Cart</button>
+            </form>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+        <a class="btn" name="button" href="/">Back to All Venues</a>
     </div>
-  </div>
-</div>
+  </li>
+</ul>

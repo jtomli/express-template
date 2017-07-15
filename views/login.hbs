@@ -1,11 +1,41 @@
 {{#if error}}
-<div class="alert alert-danger" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  {{error}}
-</div>
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span> {{error}}
+  </div>
 {{/if}}
-<form method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+<div class="parallax-container valign-wrapper">
+  <div class="container">
+    <br><br>
+    <center>
+      <form id="form" method="post" action="/login">
+        <div class="divBox">
+          <input type='text' name="username" placeholder="Username" class="row center">
+        </div>
+
+        <div class="divBox" id="password">
+          <input name="password" type='text' placeholder="Password" class='row center'>
+        </div>
+
+
+        <div id="LoginBtn" class="row center">
+          <button class="btn waves-effect waves-light brown" type="submit">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+          <a class="btn btn-primary" href="/signup">Register</a>
+
+        </div>
+
+      </form>
+    </center>
+  </div>
+  <br><br>
+
+
+  <div class="parallax"><img src="../images/man-sunglasses-art-graffiti.jpg" alt="Unsplashed login background img"></div>
+</div>
+
+<!-- <form method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
   <h3>Login</h3>
   <div class="form-group">
     <label>Username</label>
@@ -19,4 +49,4 @@
     <button class="btn btn-success">Login</button>
     <a class="btn btn-primary" href="/signup">Register</a>
   </div>
-</form>
+</form> -->
