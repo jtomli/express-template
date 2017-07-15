@@ -1,14 +1,9 @@
 [
     {
-        "name": "Field House",
-        "hours": {
-            "open_now": true,
-            "weekday_text": []
-        },
-        "rating": 3.4,
+        "name": "Fairmont",
+        "rating": 4.5,
         "type": [
-            "bar",
-            "night_club",
+            "lodging",
             "restaurant",
             "food",
             "point_of_interest",
@@ -16,14 +11,31 @@
         ]
     },
     {
-        "name": "Frankford Hall",
+        "name": "Cornell Hotel De France",
         "hours": {
             "open_now": true,
             "weekday_text": []
         },
-        "rating": 4.4,
+        "rating": 4.2,
         "type": [
-            "bar",
+            "lodging",
+            "restaurant",
+            "food",
+            "clothing_store",
+            "store",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "San Francisco Marriott Union Square",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.3,
+        "type": [
+            "lodging",
             "restaurant",
             "food",
             "point_of_interest",
@@ -31,27 +43,14 @@
         ]
     },
     {
-        "name": "Union Transfer",
+        "name": "San Francisco Marriott Marquis",
         "hours": {
             "open_now": true,
             "weekday_text": []
         },
-        "rating": 4.7,
+        "rating": 4.3,
         "type": [
-            "bar",
-            "point_of_interest",
-            "establishment"
-        ]
-    },
-    {
-        "name": "Ladder 15",
-        "hours": {
-            "open_now": true,
-            "weekday_text": []
-        },
-        "rating": 3.5,
-        "type": [
-            "bar",
+            "lodging",
             "restaurant",
             "food",
             "point_of_interest",
@@ -59,7 +58,18 @@
         ]
     },
     {
-        "name": "Del Frisco's Double Eagle Steak House",
+        "name": "Le Méridien San Francisco",
+        "rating": 4.3,
+        "type": [
+            "lodging",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Comstock Saloon",
         "hours": {
             "open_now": true,
             "weekday_text": []
@@ -74,12 +84,12 @@
         ]
     },
     {
-        "name": "El Rey",
+        "name": "Credo",
         "hours": {
             "open_now": true,
             "weekday_text": []
         },
-        "rating": 4.2,
+        "rating": 4.1,
         "type": [
             "bar",
             "restaurant",
@@ -89,24 +99,21 @@
         ]
     },
     {
-        "name": "Philadelphia Brewing Co",
+        "name": "La Mar Cebicheria Peruana",
         "hours": {
             "open_now": true,
             "weekday_text": []
         },
-        "rating": 4.6,
+        "rating": 4.3,
         "type": [
-            "bar",
-            "liquor_store",
             "restaurant",
             "food",
-            "store",
             "point_of_interest",
             "establishment"
         ]
     },
     {
-        "name": "JG Domestic",
+        "name": "54 Mint",
         "hours": {
             "open_now": false,
             "weekday_text": []
@@ -121,7 +128,98 @@
         ]
     },
     {
-        "name": "The Capital Grille",
+        "name": "Outerlands",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.3,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "The Stinking Rose",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 3.7,
+        "type": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Grove Yerba Buena",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.3,
+        "type": [
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Lers Ros",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4.3,
+        "type": [
+            "meal_delivery",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Local Kitchen & Wine Merchant",
+        "hours": {
+            "open_now": true,
+            "weekday_text": []
+        },
+        "rating": 4,
+        "type": [
+            "bar",
+            "night_club",
+            "liquor_store",
+            "restaurant",
+            "food",
+            "store",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Benu",
+        "hours": {
+            "open_now": false,
+            "weekday_text": []
+        },
+        "rating": 4.6,
+        "type": [
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ]
+    },
+    {
+        "name": "Park Tavern",
         "hours": {
             "open_now": true,
             "weekday_text": []
@@ -136,12 +234,12 @@
         ]
     },
     {
-        "name": "Amis",
+        "name": "Rogue Ales Public House",
         "hours": {
             "open_now": true,
             "weekday_text": []
         },
-        "rating": 4.4,
+        "rating": 4.1,
         "type": [
             "bar",
             "restaurant",
@@ -151,22 +249,7 @@
         ]
     },
     {
-        "name": "Zama",
-        "hours": {
-            "open_now": true,
-            "weekday_text": []
-        },
-        "rating": 4.2,
-        "type": [
-            "bar",
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-        ]
-    },
-    {
-        "name": "City Tap House",
+        "name": "Southern Pacific Brewing",
         "hours": {
             "open_now": true,
             "weekday_text": []
@@ -181,116 +264,29 @@
         ]
     },
     {
-        "name": "Brauhaus Schmitz",
-        "hours": {
-            "open_now": true,
-            "weekday_text": []
-        },
-        "rating": 4.4,
-        "type": [
-            "bar",
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-        ]
-    },
-    {
-        "name": "McGillin's Olde Ale House",
-        "hours": {
-            "open_now": true,
-            "weekday_text": []
-        },
-        "rating": 4.2,
-        "type": [
-            "bar",
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-        ]
-    },
-    {
-        "name": "XFINITY Live! Philadelphia",
-        "rating": 4.1,
-        "type": [
-            "bar",
-            "point_of_interest",
-            "establishment"
-        ]
-    },
-    {
-        "name": "Urban Saloon",
-        "hours": {
-            "open_now": true,
-            "weekday_text": []
-        },
-        "rating": 3.7,
-        "type": [
-            "bar",
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-        ]
-    },
-    {
-        "name": "El Vez",
-        "hours": {
-            "open_now": true,
-            "weekday_text": []
-        },
-        "rating": 4.2,
-        "type": [
-            "bar",
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-        ]
-    },
-    {
-        "name": "Tavern on Broad",
-        "hours": {
-            "open_now": true,
-            "weekday_text": []
-        },
-        "rating": 3.6,
-        "type": [
-            "bar",
-            "night_club",
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-        ]
-    },
-    {
-        "name": "Maggiano's",
+        "name": "Daily Grill",
         "hours": {
             "open_now": true,
             "weekday_text": []
         },
         "rating": 4.1,
         "type": [
-            "restaurant",
             "bar",
+            "restaurant",
             "food",
             "point_of_interest",
             "establishment"
         ]
     },
     {
-        "name": "Lucky Strike Philadelphia",
+        "name": "Tacolicious",
         "hours": {
             "open_now": true,
             "weekday_text": []
         },
-        "rating": 3.7,
+        "rating": 4.3,
         "type": [
-            "bowling_alley",
             "bar",
-            "night_club",
             "restaurant",
             "food",
             "point_of_interest",

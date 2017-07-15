@@ -56,7 +56,7 @@ router.post('/info', function(req, res) {
         fs.writeFile('output.json', JSON.stringify(venues, null, 4), function(err) {
           console.log('File successfully written! - Check your project directory for the output.json file');
         })
-        //res.render('list');
+        res.render('list', {venues: venues});
       }
     })
   }).catch(function(err) {
