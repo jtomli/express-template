@@ -23,6 +23,11 @@ router.get('/', function(req, res, next) {
   }
 });
 
+router.get('/refresh', function(req, res) {
+  req.session.search = [];
+  res.redirect('/');
+})
+
 router.get('/wishlist', function(req, res, next) {
   res.render('wishlist');
 })
@@ -35,6 +40,7 @@ let placeId;
 let venues = [];
 
 router.post('/info', function(req, res) {
+  console.log("search", req.session);
   if (req.session.search.length > 0) {
     console.log("search has items");
     res.render('list', {venues: req.session.search});
@@ -80,25 +86,21 @@ router.post('/info', function(req, res) {
         console.log("done!!!!!", arrayOfResults);
         req.session.search = arrayOfResults;
         res.render('list', {venues: arrayOfResults});
-      }).catch(err => console.log("ERR", err))
-    }).catch(function(err) {
-      console.log(err);
-    });
+      })
+      .catch(err => console.log("ERR", err))
   }
 })
 
-router.get('/:venueid', function(req, res) {
-  var sampleVenue = {
-    name: "Julia's Kitchen",
-    address: "329 12th St",
-    rating: '4.5',
-    type: 'restaurant',
-  }
-  res.render('venue', {venue: sampleVenue})
-})
+// router.get('/:venueid', function(req, res) {
+//   var sampleVenue = {
+//     name: "Julia's Kitchen",
+//     address: "329 12th St",
+//     rating: '4.5',
+//     type: 'restaurant',
+//   }
+//   res.render('venue', {venue: sampleVenue})
+// })
 
-
-router.get('/venue/:venueId', function(req, res) {})
 
 ///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
 
