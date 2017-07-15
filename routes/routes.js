@@ -16,7 +16,10 @@ router.get('/', function(req, res, next) {
   } else {
     req.session.search = req.session.search || [];
     if (req.session.search.length > 0) {
-      res.render('list', {venues: req.session.search})
+      res.render('list', {
+        venues: req.session.search,
+        googleApi: process.env.GOOGLEPLACES
+      })
     } else {
       res.render('home', {googleApi: process.env.GOOGLEPLACES});
     }
@@ -30,7 +33,10 @@ router.post('/info', function(req, res) {
   console.log("search", req.session);
   if (req.session.search.length > 0) {
     console.log("search has items");
-    res.render('list', {venues: req.session.search});
+    res.render('list', {
+      venues: req.session.search,
+      googleApi: process.env.GOOGLEPLACES
+    });
   } else {
     var options = {
       provider: 'google',
@@ -51,7 +57,6 @@ router.post('/info', function(req, res) {
         obj.results.forEach(item => {
           placeId.push(item.place_id)
         });
-
         for (var i = 0; i < placeId.length; i++) {
           venues.push(request(`https://maps.googleapis.com/maps/api/place/details/json?key=${process.env.GOOGLEPLACES}&placeid=${placeId[i]}`).then(resp => JSON.parse(resp)).then(obj2 => ({
             name: obj2.result.name,
@@ -73,7 +78,10 @@ router.post('/info', function(req, res) {
       }).then(arrayOfResults => {
         console.log("done!!!!!", arrayOfResults);
         req.session.search = arrayOfResults;
-        res.render('list', {venues: arrayOfResults});
+        res.render('list', {
+          venues: arrayOfResults,
+          googleApi: process.env.GOOGLEPLACES
+        });
       }).catch(err => console.log("ERR", err))
     }).catch(function(err) {
       console.log(err);
