@@ -12,33 +12,25 @@ var userSchema = mongoose.Schema({
   }
 });
 
-var venueSchema = mongoose.Schema({
-  name: String,
-  address: String,
-  phone: String,
-  rating: String,
-  type: String,
-  photos: Array,
-  url: String,
-  website: String
-});
+// var venueSchema = mongoose.Schema({
+//   name: String,
+//   address: String,
+//   phone: String,
+//   rating: String,
+//   type: String,
+//   photos: Array,
+//   url: String,
+//   website: String
+// });
 
-var cartSchema = mongoose.Schema({
-  username: String,
-  venues: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Venue'
-    }
-  ]
-})
+var cartSchema = mongoose.Schema({username: String, venues: []})
 
 User = mongoose.model('User', userSchema);
-Venue = mongoose.model('Venue', venueSchema);
+// Venue = mongoose.model('Venue', venueSchema);
 Cart = mongoose.model('Cart', cartSchema);
 
 module.exports = {
   User: User,
-  Venue: Venue,
+  // Venue: Venue,
   Cart: Cart
 };

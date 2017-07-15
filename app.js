@@ -70,6 +70,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
     }
     // if no user present, auth failed
     if (!user) {
+      console.log("no user");
       return done(null, false, {message: 'Incorrect username.'});
     }
     // if passwords do not match, auth failed
@@ -77,6 +78,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
       return done(null, false, {message: 'Incorrect password.'});
     }
     // auth has has succeeded
+    console.log('success');
     return done(null, user);
   });
 }));
