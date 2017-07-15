@@ -40,7 +40,6 @@ let placeId;
 let venues = [];
 
 router.post('/info', function(req, res) {
-  console.log("search", req.session);
   if (req.session.search.length > 0) {
     console.log("search has items");
     res.render('list', {venues: req.session.search});
@@ -92,8 +91,10 @@ router.post('/info', function(req, res) {
         console.log("done!!!!!", arrayOfResults);
         req.session.search = arrayOfResults;
         res.render('list', {venues: arrayOfResults});
-      })
-      .catch(err => console.log("ERR", err))
+      }).catch(err => console.log("ERR", err))
+    }).catch(function(err) {
+      console.log(err);
+    });
   }
 })
 
