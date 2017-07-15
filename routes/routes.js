@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
   } else {
     req.session.search = req.session.search || [];
     if (req.session.search.length > 0) {
-      res.render('list', {venues: req.session.search})
+      res.render('list', {venues: req.session.search, googleApi: process.env.GOOGLEPLACES})
     } else {
       res.render('home', {googleApi: process.env.GOOGLEPLACES});
     }
@@ -55,7 +55,6 @@ router.post('/info', function(req, res) {
         obj.results.forEach(item => {
           placeId.push(item.place_id)
         });
-
         for (var i=0; i<placeId.length; i++){
             venues.push(
                 request(`https://maps.googleapis.com/maps/api/place/details/json?key=${process.env.GOOGLEPLACES}&placeid=${placeId[i]}`)
