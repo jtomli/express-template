@@ -11,6 +11,7 @@ var NodeGeocoder = require('node-geocoder');
 // Users who are not logged in can see these routes
 
 router.get('/', function(req, res, next) {
+  console.log('req.user', req.user);
   if (!req.user) {
     res.redirect('/login');
   } else {
@@ -105,19 +106,19 @@ router.get('/venue/:venueName', function(req, res) {
   })
 })
 
-router.post('/venue/:venueName', function(req, res) {
-  console.log("cart registered");
-})
+// router.post('/venue/:venueName', function(req, res) {
+//   console.log("cart registered");
+// })
 
 router.post('/cart/:venueName', function(req, res) {
   User.findById(req.user._id).populate('cart').exec(function(err, user) {
     req.session.search.forEach(venue => {
       if (venue.name === req.params.venueName) {
-        var newDbVenue = new Venue(venue);
-        newDbVenue.save(function(err, savedVenue) {
-          user.cart.venues.push(savedVenue._id);
-          user.save(function() {
-            res.render('cart', {cart: user.cart.venues});
+        var cart = user.cart;
+        Cart.findById(cart._id, function(err, foundCart) {
+          cart.venues.push(venue);
+          cart.save(function(err, savedCart) {
+            res.render('cart', {venues: user.cart.venues})
           })
         })
       }
@@ -127,7 +128,7 @@ router.post('/cart/:venueName', function(req, res) {
 
 router.get('/showCart', function(req, res) {
   User.findById(req.user._id).populate('cart').exec(function(err, user) {
-    console.log(user.cart.venues);
+    console.log("cart!", user.cart)
     res.render('cart', {venues: user.cart.venues})
   })
 })
