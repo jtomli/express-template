@@ -27,6 +27,7 @@ let placeId;
 let venues = [];
 
 router.post('/info', function(req, res) {
+  console.log("search", req.session);
   if (req.session.search.length > 0) {
     console.log("search has items");
     res.render('list', {venues: req.session.search});
