@@ -5,7 +5,11 @@ var userSchema = mongoose.Schema({
   password: String,
   email: String,
   fname: String,
-  lname: String
+  lname: String,
+  cart: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Cart'
+  }
 });
 
 var venueSchema = mongoose.Schema({
@@ -19,10 +23,19 @@ var venueSchema = mongoose.Schema({
   website: String
 });
 
+var cartSchema = mongoose.Schema({
+  venues: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Venue'
+  }]
+})
+
 User = mongoose.model('User', userSchema);
 Venue = mongoose.model('Venue', venueSchema);
+Cart = mongoose.model('Cart', cartSchema);
 
 module.exports = {
-    User:User,
-    Venue:Venue
+    User: User,
+    Venue: Venue,
+    Cart: Cart
 };

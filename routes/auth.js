@@ -17,22 +17,28 @@ module.exports = function(passport) {
         error: "Passwords don't match."
       });
     }
-    var u = new models.User({
-      username: req.body.username,
-      password: req.body.password,
-      email: req.body.email,
-      fname: req.body.fname,
-      lname: req.body.lname
-    });
-    u.save(function(err, user) {
-      if (err) {
-        console.log(err);
-        res.status(500).redirect('/register');
-        return;
-      }
-      console.log(user);
-      res.redirect('/login');
-    });
+    var cart = new models.Cart({
+      cart: []
+    })
+    cart.save(function(err, cart) {
+      var u = new models.User({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        fname: req.body.fname,
+        lname: req.body.lname,
+        cart: cart._id
+      });
+      u.save(function(err, user) {
+        if (err) {
+          console.log(err);
+          res.status(500).redirect('/register');
+          return;
+        }
+        console.log(user);
+        res.redirect('/login');
+      });
+    })
   });
 
   // GET Login page
