@@ -55,16 +55,16 @@ router.post('/info', function(req, res) {
             venues.push(
                 request(`https://maps.googleapis.com/maps/api/place/details/json?key=${process.env.GOOGLEPLACES}&placeid=${placeId[i]}`)
                 .then(resp => JSON.parse(resp))
-                .then(obj2 => ({
+                .then(obj2 =>({
                   name: obj2.result.name,
                   address: obj2.result.formatted_address,
-                //   phone: obj2.result.formatted_phone_number,
-                //   hours: obj2.result.opening_hours.weekday_text,
+                  phone: obj2.result.formatted_phone_number,
                   photos: obj2.result.photos,
                   rating: obj2.result.rating,
                   type: obj2.result.types,
                   url: obj2.result.url,
-                  website: obj2.result.website
+                  website: obj2.result.website,
+                  link: 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='+ obj2.result.photos[0].photo_reference + '&key='+ process.env.GOOGLEPLACES
               })))
         }
         console.log('venues', venues[1]);
