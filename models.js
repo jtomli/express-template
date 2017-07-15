@@ -12,16 +12,21 @@ var userSchema = mongoose.Schema({
   }
 });
 
-// var venueSchema = mongoose.Schema({
-//   name: String,
-//   address: String,
-//   phone: String,
-//   rating: String,
-//   type: String,
-//   photos: Array,
-//   url: String,
-//   website: String
-// });
+var venueSchema = mongoose.Schema({
+  name: String,
+  address: String,
+  phone: String,
+  rating: String,
+  type: String,
+  photos: Array,
+  url: String,
+  website: String,
+  lat: Number,
+  long: Number,
+  hours: String,
+  type: String,
+  link: String
+});
 
 var cartSchema = mongoose.Schema({username: String, venues: []})
 

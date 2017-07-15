@@ -12,7 +12,6 @@ var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 // Users who are not logged in can see these routes
 
 router.get('/', function(req, res, next) {
-  console.log('req.user', req.user);
   if (!req.user) {
     res.redirect('/login');
   } else {
@@ -98,6 +97,7 @@ router.get('/refresh', function(req, res) {
 })
 
 router.get('/venue/:venueName', function(req, res) {
+
   var name = req.params.venueName;
   req.session.search.forEach(venue => {
     if (venue.name === name) {
@@ -106,9 +106,9 @@ router.get('/venue/:venueName', function(req, res) {
   })
 })
 
-// router.post('/venue/:venueName', function(req, res) {
-//   console.log("cart registered");
-// })
+router.post('/venue/:venueName', function(req, res) {
+  console.log("cart registered");
+})
 
 router.post('/cart/:venueName', function(req, res) {
   User.findById(req.user._id).populate('cart').exec(function(err, user) {
@@ -128,7 +128,7 @@ router.post('/cart/:venueName', function(req, res) {
 
 router.get('/showCart', function(req, res) {
   User.findById(req.user._id).populate('cart').exec(function(err, user) {
-    console.log("cart!", user.cart)
+    console.log(user.cart.venues);
     res.render('cart', {venues: user.cart.venues})
   })
 })
