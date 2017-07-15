@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models');
 var User = models.User;
-var request = require('request');
+var request = require('request-promise');
 var fs = require('fs');
 var NodeGeocoder = require('node-geocoder');
 
@@ -21,8 +21,11 @@ router.post('/wishlist', function(req, res) {
   console.log(req.body)
 })
 
+let placeId;
+let venues = [];
+
 router.post('/info', function(req, res) {
-  console.log(req.body);
+  console.log('this our body', req.body);
   var options = {
     provider: 'google',
     httpAdapter: 'https', // Default
@@ -35,59 +38,46 @@ router.post('/info', function(req, res) {
   geocoder.geocode(req.body.location).then(function(response) {
     lat = response[0].latitude;
     long = response[0].longitude;
-    console.log(response, lat, long);
   }).then(function() {
     let radius = parseInt(req.body.radius) * 1609;
     let type = req.body.type.split(" ").join("_").toLowerCase();
-    request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=${lat},${long}&radius=${radius}&type=${type}`, function(error, response, body) {
-      if (!error && response.statusCode == 200) {
-        var obj = JSON.parse(body);
-        var venues = [];
-        obj.results.forEach(item => {
-          venues.push({
-            name: item.name,
-            address: item.formatted_address,
-            phone: item.formatted_phone_number,
-            hours: item.opening_hours,
-            rating: item.rating,
-            type: item.types
-          })
-        });
-        fs.writeFile('output.json', JSON.stringify(venues, null, 4), function(err) {
-          console.log('File successfully written! - Check your project directory for the output.json file');
-        })
-        res.render('list', {venues: venues});
+    console.log("reading api body");
+    return request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=${lat},${long}&radius=${radius}&type=${type}`).then(resp => JSON.parse(resp)).then(obj => {
+      placeId = [];
+      obj.results.forEach(item => {
+        placeId.push(item.place_id)
+      });
+      console.log('placeid', placeId);
+
+      for (var i = 0; i < placeId.length; i++) {
+        venues.push(request(`https://maps.googleapis.com/maps/api/place/details/json?key=${process.env.GOOGLEPLACES}&placeid=${placeId[i]}`).then(resp => JSON.parse(resp)).then(obj2 => ({
+          name: obj2.result.name, address: obj2.result.formatted_address, phone: obj2.result.formatted_phone_number,
+          //   hours: obj2.result.opening_hours.weekday_text,
+          photos: obj2.result.photos,
+          rating: obj2.result.rating,
+          type: obj2.result.types,
+          url: obj2.result.url
+        })))
+
       }
-    })
+
+      console.log('venues', venues[1]);
+
+      return Promise.all(venues)
+    }).then(arrayOfResults => {
+      console.log("done!!!!!", arrayOfResults);
+      res.render('list', {venues: arrayOfResults});
+    }).catch(err => console.log("ERR", err))
   }).catch(function(err) {
     console.log(err);
   });
-
-  // this gets the information from the form
-  //(type=req.body.type location= req.body.location radius= req.body.radius * 10000)
-  // we need to change the address into latitude/longitude
-  // give this to an ajax request
-  // push the object that comes back into several arrays in a data file [name,address,phone,ratings, opening time, closing time, photos, website]
-  //this data file is picked up when you go to results
 })
 
 router.get('/results', function(req, res, next) {
-  var sampleRestaurants = [
-    {
-      name: "Julia's Kitchen",
-      address: '1200 Red Barn Road, Lower Gwynedd, PA 19002',
-      phone: '215-718-5073',
-      rating: '5 stars',
-      hours: '10 to 6'
-    }, {
-      name: "Reed's Kitchen",
-      address: '329 12th Street, SOMA, CA 94103',
-      phone: '345-333-2345',
-      rating: '1 star',
-      hours: '10 to 6'
-    }
-  ];
-  res.render('list', {restaurants: sampleRestaurants});
+  res.render('list', {venues: venues});
+  // get queries
+  //run shit ton of things you had in /post thingy
+  //render
 });
 
 router.get('/venue/:venueId', function(req, res) {})
