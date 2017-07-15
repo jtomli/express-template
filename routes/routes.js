@@ -63,6 +63,8 @@ router.post('/info', function(req, res) {
             phone: obj2.result.formatted_phone_number,
             photos: obj2.result.photos,
             rating: obj2.result.rating,
+            lat: obj2.result.geometry.location.lat,
+            long: obj2.result.geometry.location.lng,
             hours: obj2.result.opening_hours
               ? obj2.result.opening_hours.weekday_text
               : ["Not found"],
