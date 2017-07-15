@@ -1,5 +1,38 @@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{googleApi}}&libraries=places"></script>
 <div class="results-page">
-  <h1 style='padding: 10px'>Best Venue Matches</h1>
+  <div>
+    <h1 style='padding: 10px'>Best Venue Matches</h1>
+    <div>Not happy with your results? Fill out the form again below.</div>
+    <div class="row center">
+      <form id="form" method="post" action="/info">
+        <div class="input-field col s6">
+          <select name="type">
+            <option disabled selected>Choose your venue</option>
+            <option>Bar</option>
+            <option>Restaurant</option>
+            <option>Night club</option>
+            <option>Museum</option>
+            <option>Library</option>
+            <option>Art gallery</option>
+          </select>
+        </div>
+        <div id="locationField" class="input-field col s6">
+          <input type="text" name="location" id="autocomplete">
+        </div>
+        <div class="input-field col s6">
+          <select name="radius">
+            <option disabled selected>Choose your radius</option>
+            <option value='5'>5 miles</option>
+            <option value='10'>10 miles</option>
+            <option value ='20'>20 miles</option>
+          </select>
+        </div>
+        <button class="btn waves-effect waves-light brown" type="submit">Submit
+            <i class="material-icons right">send</i>
+        </button>
+      </form>
+    </div>
+  </div>
   <!-- use hbs #each to loop through results. just writing html for one result -->
   <ul class="list-group">
     {{#each venues}}
@@ -19,7 +52,7 @@
               <li><b>Website:</b> <a href="{{this.website}}">{{this.website}} </a> </li>
               <li><b>Hours:</b>
                   {{#each this.hours}}
-                    <p>{{this}}</p> 
+                    <p>{{this}}</p>
                   {{/each}}
               </li>
             </ul>

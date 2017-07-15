@@ -42,7 +42,7 @@ let venues = [];
 router.post('/info', function(req, res) {
   if (req.session.search.length > 0) {
     console.log("search has items");
-    res.render('list', {venues: req.session.search});
+    res.render('list', {venues: req.session.search, googleApi: process.env.GOOGLEPLACES});
   } else {
     var options = {
       provider: 'google',
@@ -90,7 +90,7 @@ router.post('/info', function(req, res) {
       }).then(arrayOfResults => {
         console.log("done!!!!!", arrayOfResults);
         req.session.search = arrayOfResults;
-        res.render('list', {venues: arrayOfResults});
+        res.render('list', {venues: arrayOfResults, googleApi: process.env.GOOGLEPLACES});
       }).catch(err => console.log("ERR", err))
     }).catch(function(err) {
       console.log(err);
