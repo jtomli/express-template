@@ -1,0 +1,23 @@
+from client (sendgrid) to business:
+
+<p>I am interested in your venue for my upcoming event. I would like to set a
+flexible date for the event on {{date from wishlist form}} at around {{time from wishlist form}}
+for {{number of hours from wishlist form}} hours,
+and am expecting approximately {{number of guests from wishlist form}} guests.
+In terms of pricing, I would prefer {{type of pricing from form}}. Please let me know
+of any packages or potential prices for my event. </p>
+<br></br>
+Looking forward to hearing back from you!
+Best,
+{{first name}} {{last name}}
+{{user email}}
+
+
+from sendgrid to client (confirmation):
+
+<p>Hello Festiv User, {{first name}} {{last name}}!
+An email was sent to the following venues regarding
+your recent venue search: {{#each cart}} {{this.name to get restaurant name}}.
+Thank you for using Festiv.<p>
+<br></br>
+<p>Questions or feedback? Email us at festiv@horizons.com.<p>
