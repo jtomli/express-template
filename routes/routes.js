@@ -94,6 +94,9 @@ router.get('/refresh', function(req, res) {
 })
 
 router.get('/venue/:venueName', function(req, res) {
+
+
+
   var name = req.params.venueName;
   req.session.search.forEach(venue => {
     if (venue.name === name) {
