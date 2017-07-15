@@ -1,6 +1,5 @@
 <div class="results-page">
-  <h1 style='padding: 10px'>Your results</h1>
-  <a class="btn" href="/refresh">Back Home</a>
+  <h1 style='padding: 10px'>Best Venue Matches</h1>
   <!-- use hbs #each to loop through results. just writing html for one result -->
   <ul class="list-group">
     {{#each venues}}
@@ -8,17 +7,21 @@
       <div class="container">
         <div class="row">
           <div class="col l6 s12">
-            <h5><a href="/venue?name={{this.name}}">{{this.name}}</a></h5>
-            <p>Here is a blurb about {{this.name}}, or possibly a photo. </p>
+            <h5>{{this.name}}</h5>
+            <img src='{{this.link}}'>
           </div>
           <div class="col l6 s12">
             <h5>Info</h5>
             <ul>
-              <li>Address: <a href="{{this.url}}">{{this.address}} </a></li>
-              <li>Phone Number: {{this.phone}} </li>
-              <li>Rating: {{this.rating}} </li>
-              <li>Hours: {{this.hours}} </li>
-              <li>website: <a href="{{this.website}}">{{this.website}} </a> </li>
+              <li><b>Address: </b><a href="{{this.url}}">{{this.address}} </a></li>
+              <li><b>Phone Number:</b> {{this.phone}} </li>
+              <li><b>Rating:</b> {{this.rating}} </li>
+              <li><b>Website:</b> <a href="{{this.website}}">{{this.website}} </a> </li>
+              <li><b>Hours:</b>
+                  {{#each this.hours}}
+                    <p>{{this}}</p> 
+                  {{/each}}
+              </li>
             </ul>
           </div>
         </div>
