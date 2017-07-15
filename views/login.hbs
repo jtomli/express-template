@@ -1,45 +1,35 @@
 {{#if error}}
-<div class="alert alert-danger" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  {{error}}
-</div>
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span> {{error}}
+  </div>
 {{/if}}
 <div class="parallax-container valign-wrapper">
-          <div class="container">
-            <br><br>
-<center>
-              <form id="form" method="post" action="/wishlist">
-                <div class="divBox" >
-                  <input type='text' name="username" placeholder="Username" class="row center">
-                <!--  <select name="type">
-                    <option disabled selected>Choose your venue</option>
-                    <option>Bar</option>
-                    <option>Restaurant</option>
-                    <option>Night club</option>
-                    <option>Museum</option>
-                    <option>Library</option>
-                    <option>Art gallery</option>
-                  </select> -->
-                </div>
+  <div class="container">
+    <br><br>
+    <center>
+      <form id="form" method="post" action="/login">
+        <div class="divBox">
+          <input type='text' name="username" placeholder="Username" class="row center">
+        </div>
 
-                <div class="divBox" id="password">
-                  <input name="password" type = 'text' placeholder="Password" class= 'row center'>
-                </div>
+        <div class="divBox" id="password">
+          <input name="password" type='text' placeholder="Password" class='row center'>
+        </div>
 
 
-                <div id="LoginBtn" class="row center">
-                <button class="btn waves-effect waves-light brown" type="submit">Submit
+        <div id="LoginBtn" class="row center">
+          <button class="btn waves-effect waves-light brown" type="submit">Submit
                     <i class="material-icons right">send</i>
                 </button>
-                <a class="btn btn-primary" href="/signup">Register</a>
+          <a class="btn btn-primary" href="/signup">Register</a>
 
-              </div>
+        </div>
 
-              </form>
-            </center>
-            </div>
-            <br><br>
+      </form>
+    </center>
+  </div>
+  <br><br>
 
 
   <div class="parallax"><img src="../images/man-sunglasses-art-graffiti.jpg" alt="Unsplashed login background img"></div>
