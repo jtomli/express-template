@@ -24,10 +24,13 @@ var venueSchema = mongoose.Schema({
 });
 
 var cartSchema = mongoose.Schema({
-  venues: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Venue'
-  }]
+  username: String,
+  venues: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Venue'
+    }
+  ]
 })
 
 User = mongoose.model('User', userSchema);
@@ -35,7 +38,7 @@ Venue = mongoose.model('Venue', venueSchema);
 Cart = mongoose.model('Cart', cartSchema);
 
 module.exports = {
-    User: User,
-    Venue: Venue,
-    Cart: Cart
+  User: User,
+  Venue: Venue,
+  Cart: Cart
 };

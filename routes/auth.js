@@ -12,14 +12,10 @@ module.exports = function(passport) {
 
   router.post('/signup', function(req, res) {
     // validation step
-    if (req.body.password!==req.body.passwordRepeat) {
-      return res.render('signup', {
-        error: "Passwords don't match."
-      });
+    if (req.body.password !== req.body.passwordRepeat) {
+      return res.render('signup', {error: "Passwords don't match."});
     }
-    var cart = new models.Cart({
-      cart: []
-    })
+    var cart = new models.Cart({cart: [], username: req.body.username})
     cart.save(function(err, cart) {
       var u = new models.User({
         username: req.body.username,
@@ -47,7 +43,7 @@ module.exports = function(passport) {
   });
 
   // POST Login page
-  router.post('/login', passport.authenticate('local',{
+  router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login'
   }));
