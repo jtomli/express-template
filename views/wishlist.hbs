@@ -1,12 +1,13 @@
+<!-- <div class="parallax-container">
     <form id="form" method="post" action="/wishlist" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
           <div id="guests">
-            <input name="guestCount" type = 'text' placeholder="Guest Count" class= 'row'>
+            <input name="guestCount" type = 'text' placeholder="Guest Count" class= 'row center'>
           </div>
           <div id = 'start'>
-            <input placeholder="start time" name="date"type = 'date'class = 'row'>
+            <input placeholder="start time" name="date"type = 'date'class = 'row center'>
           </div>
           <div id="hours">
-            <input name="hours" type = 'text' placeholder="Number of hours" class= 'row'>
+            <input name="hours" type = 'text' placeholder="Number of hours" class= 'row center'>
           </div>
           <div id = 'price'>
               <select name="price">
@@ -19,3 +20,49 @@
             <button type="submit" class='Submit' id='Submit'>Submit</button>
           </div>
         </form>
+</div>
+-->
+<div class="parallax-container valign-wrapper">
+          <div class="container">
+            <br><br>
+<center>
+              <form id="form" method="post" action="/wishlist">
+                <div class="divBox" >
+                  <input type='text' name="guestCount" placeholder="Guest Count" class="row center">
+                <!--  <select name="type">
+                    <option disabled selected>Choose your venue</option>
+                    <option>Bar</option>
+                    <option>Restaurant</option>
+                    <option>Night club</option>
+                    <option>Museum</option>
+                    <option>Library</option>
+                    <option>Art gallery</option>
+                  </select> -->
+                </div>
+                <div class="divBox">
+                  <input placeholder="start time" name="date" type ="datetime-local" id="dateBox">
+                </div>
+                <div class="divBox" id="hours">
+                  <input name="hours" type = 'text' placeholder="Number of hours" class= 'row center'>
+                </div>
+
+                <div class="divBox" id = 'price' >
+                    <select name="price">
+                      <option id="choosePrice" disabled selected>Choose Your Price Type</option>
+                      <option>Open Bar</option>
+                      <option>Minimum Spend</option>
+                    </select>
+                </div>
+                <div id="submitBtn" class="row center">
+                <button class="btn waves-effect waves-light brown" type="submit">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+              </div>
+              </form>
+            </center>
+            </div>
+            <br><br>
+
+
+  <div class="parallax"><img src="../images/rsz_second.jpg" alt="Unsplashed background img 2"></div>
+</div>
