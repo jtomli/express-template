@@ -5,7 +5,47 @@
   {{error}}
 </div>
 {{/if}}
-<form method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+<div class="parallax-container valign-wrapper">
+          <div class="container">
+            <br><br>
+<center>
+              <form id="form" method="post" action="/wishlist">
+                <div class="divBox" >
+                  <input type='text' name="username" placeholder="Username" class="row center">
+                <!--  <select name="type">
+                    <option disabled selected>Choose your venue</option>
+                    <option>Bar</option>
+                    <option>Restaurant</option>
+                    <option>Night club</option>
+                    <option>Museum</option>
+                    <option>Library</option>
+                    <option>Art gallery</option>
+                  </select> -->
+                </div>
+
+                <div class="divBox" id="password">
+                  <input name="password" type = 'text' placeholder="Password" class= 'row center'>
+                </div>
+
+
+                <div id="LoginBtn" class="row center">
+                <button class="btn waves-effect waves-light brown" type="submit">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+                <a class="btn btn-primary" href="/signup">Register</a>
+
+              </div>
+
+              </form>
+            </center>
+            </div>
+            <br><br>
+
+
+  <div class="parallax"><img src="../images/man-sunglasses-art-graffiti.jpg" alt="Unsplashed login background img"></div>
+</div>
+
+<!-- <form method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
   <h3>Login</h3>
   <div class="form-group">
     <label>Username</label>
@@ -19,4 +59,4 @@
     <button class="btn btn-success">Login</button>
     <a class="btn btn-primary" href="/signup">Register</a>
   </div>
-</form>
+</form> -->
