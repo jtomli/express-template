@@ -30,9 +30,7 @@ let placeId;
 let venues = [];
 
 router.post('/info', function(req, res) {
-  console.log("search", req.session);
   if (req.session.search.length > 0) {
-    console.log("search has items");
     res.render('list', {
       venues: req.session.search,
       googleApi: process.env.GOOGLEPLACES
@@ -73,10 +71,8 @@ router.post('/info', function(req, res) {
             link: 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + obj2.result.photos[0].photo_reference + '&key=' + process.env.GOOGLEPLACES
           })))
         }
-        console.log('venues', venues[1]);
         return Promise.all(venues)
       }).then(arrayOfResults => {
-        console.log("done!!!!!", arrayOfResults);
         req.session.search = arrayOfResults;
         res.render('list', {
           venues: arrayOfResults,
@@ -103,16 +99,18 @@ router.get('/venue/:venueName', function(req, res) {
   })
 })
 
+router.post('/venue/:venueName', function(req, res) {
+  console.log("cart registered");
+})
+
 router.post('/cart/:venueName', function(req, res) {
   User.findById(req.user._id).populate('cart').exec(function(err, user) {
     req.session.search.forEach(venue => {
       if (venue.name === req.params.venueName) {
         var newDbVenue = new Venue(venue);
         newDbVenue.save(function(err, savedVenue) {
-          console.log(user.cart)
           user.cart.venues.push(savedVenue._id);
           user.save(function() {
-            console.log("added to cart");
             res.render('cart');
           })
         })
@@ -129,9 +127,7 @@ router.get('/wishlist', function(req, res, next) {
   res.render('wishlist');
 })
 
-router.post('/wishlist', function(req, res) {
-  console.log(req.body)
-})
+router.post('/wishlist', function(req, res) {})
 
 // router.get('/:venueid', function(req, res) {
 //   var sampleVenue = {
