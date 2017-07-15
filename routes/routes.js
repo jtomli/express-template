@@ -23,23 +23,11 @@ router.get('/', function(req, res, next) {
   }
 });
 
-router.get('/refresh', function(req, res) {
-  req.session.search = [];
-  res.redirect('/');
-})
-
-router.get('/wishlist', function(req, res, next) {
-  res.render('wishlist');
-})
-
-router.post('/wishlist', function(req, res) {
-  console.log(req.body)
-})
-
 let placeId;
 let venues = [];
 
 router.post('/info', function(req, res) {
+  console.log("search", req.session);
   if (req.session.search.length > 0) {
     console.log("search has items");
     res.render('list', {venues: req.session.search, googleApi: process.env.GOOGLEPLACES});
@@ -96,6 +84,34 @@ router.post('/info', function(req, res) {
       console.log(err);
     });
   }
+})
+
+router.get('/refresh', function(req, res) {
+  req.session.search = [];
+  res.redirect('/');
+})
+
+router.get('/venue/:venueName', function(req, res) {
+  var name = req.params.venueName;
+  req.session.search.forEach(venue => {
+    if(venue.name === name) {
+      res.render('venue', {venue});
+    }
+  })
+})
+
+router.get('/cart', function(req, res) {
+  User.findById(req.user.id, function(user) {
+    console.log("user", user);
+  })
+})
+
+router.get('/wishlist', function(req, res, next) {
+  res.render('wishlist');
+})
+
+router.post('/wishlist', function(req, res) {
+  console.log(req.body)
 })
 
 // router.get('/:venueid', function(req, res) {
