@@ -43,7 +43,7 @@ router.post('/info', function(req, res) {
   .then(function() {
     let radius = parseInt(req.body.radius) * 1609;
     let type = req.body.type.split(" ").join("_").toLowerCase();
-    return request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=${lat},${long}&radius=${radius}&type=${type}`)
+    return request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.GOOGLEPLACES}&location=${lat},${long}&radius=${radius}&type=${type}&minprice=3`)
     .then(resp => JSON.parse(resp))
     .then(obj => {
         placeId = [];
@@ -61,6 +61,7 @@ router.post('/info', function(req, res) {
                   phone: obj2.result.formatted_phone_number,
                   photos: obj2.result.photos,
                   rating: obj2.result.rating,
+                  hours: obj2.result.opening_hours ? obj2.result.opening_hours.weekday_text : ["Not found"],
                   type: obj2.result.types,
                   url: obj2.result.url,
                   website: obj2.result.website,

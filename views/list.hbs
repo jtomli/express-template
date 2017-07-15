@@ -1,5 +1,5 @@
 <div class="results-page">
-  <h1 style='padding: 10px'>Your results</h1>
+  <h1 style='padding: 10px'>Best Venue Matches</h1>
   <!-- use hbs #each to loop through results. just writing html for one result -->
   <ul class="list-group">
     {{#each venues}}
@@ -16,8 +16,12 @@
               <li><b>Address: </b><a href="{{this.url}}">{{this.address}} </a></li>
               <li><b>Phone Number:</b> {{this.phone}} </li>
               <li><b>Rating:</b> {{this.rating}} </li>
-              <li><b>Hours:</b> {{this.hours}} </li>
-              <li><b>website:</b> <a href="{{this.website}}">{{this.website}} </a> </li>
+              <li><b>Website:</b> <a href="{{this.website}}">{{this.website}} </a> </li>
+              <li><b>Hours:</b>
+                  {{#each this.hours}}
+                    <p>{{this}}</p>
+                  {{/each}}
+              </li>
             </ul>
           </div>
         </div>
