@@ -1,8 +1,15 @@
 <div class="panel panel-default">
  <!-- Default panel contents -->
- <div class="panel-heading">{{venue.name}}</div>
- <div class="panel-body">
-   <div>{{venue.name}} is located at {{venue.address}}.</div>
-   <!-- map? -->
- </div>
-</div>
+     <div class="panel-heading">{{venue.name}}</div>
+     <div class="panel-body">
+       <div>{{venue.name}} is a {{venue.type}} located at {{venue.address}}.</div>
+       <div>Venue rating: {{venue.rating}}</div>
+       <!-- map? need latitude and longitude-->
+       <!-- {{# each venue.photos}}
+        display the photos
+       {{/each}} -->
+
+       <br></br>
+       <button type="button" class="btn btn-primary">Add to MyVenues</button>
+     </div>
+    </div>
