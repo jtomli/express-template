@@ -87,12 +87,16 @@ router.post('/info', function(req, res) {
   }
 })
 
-router.get('/results', function(req, res, next) {
-  res.render('list', {venues: venues});
-  // get queries
-  //run shit ton of things you had in /post thingy
-  //render
-});
+router.get('/:venueid', function(req, res) {
+  var sampleVenue = {
+    name: "Julia's Kitchen",
+    address: "329 12th St",
+    rating: '4.5',
+    type: 'restaurant',
+  }
+  res.render('venue', {venue: sampleVenue})
+})
+
 
 router.get('/venue/:venueId', function(req, res) {})
 
