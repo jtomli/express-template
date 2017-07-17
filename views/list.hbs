@@ -4,7 +4,7 @@
     <h1 style='padding: 10px'>Best Venue Matches</h1>
     <div>Not happy with your results? Fill out the form again below.</div>
     <div class="row center">
-      <form id="form" method="post" action="/info">
+      <form id="form" method="post" action="/newSearch">
         <div class="input-field col s6">
           <select name="type">
             <option disabled selected>Choose your venue</option>
@@ -40,7 +40,7 @@
       <div class="container">
         <div class="row">
           <div class="col l6 s12">
-            <a href="/venue/{{this.name}}"><h3>{{this.name}}</h3></a>
+            <a href="/venue?name={{this.name}}&address={{this.address}}"><h3>{{this.name}}</h3></a>
             <img src='{{this.link}}'>
           </div>
           <div class="col l6 s12">
@@ -59,7 +59,7 @@
             </ul>
           </div>
         </div>
-        <form action="/cart/{{this.name}}" method="post">
+        <form action="/cart?name={{this.name}}&address={{this.address}}" method="post">
           <button class="btn" type="submit" name="button">Add to MyVenues</button>
         </form>
       </div>
@@ -67,3 +67,7 @@
     {{/each}}
   </ul>
 <div>
+  <script>
+    var input = document.getElementById('autocomplete');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+  </script>

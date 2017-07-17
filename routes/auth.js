@@ -50,7 +50,9 @@ module.exports = function(passport) {
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('/');
+    req.session.destroy(function(err) {
+      res.redirect('/');
+    })
   });
 
   return router;

@@ -40,7 +40,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Passport
-/* TODO Will need for storing CART info*/
 app.use(session({
   secret: process.env.SECRET,
   store: new MongoStore({mongooseConnection: mongoose.connection})
@@ -54,7 +53,9 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  models.User.findById(id, done);
+  models.User.findById(id, function(err, user) {
+    done(err, user);
+  });
 });
 
 // passport strategy

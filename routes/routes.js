@@ -12,31 +12,41 @@ const Handlebars = require('Handlebars');
 //////////////////////////////// PUBLIC ROUTES ////////////////////////////////
 // Users who are not logged in can see these routes
 
-router.get('/', function(req, res, next) {
+// no public routes!
+
+///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
+
+router.use(function(req, res, next) {
   if (!req.user) {
     res.redirect('/login');
   } else {
-    req.session.search = req.session.search || [];
-    if (req.session.search.length > 0) {
-      res.render('list', {
-        venues: req.session.search,
-        googleApi: process.env.GOOGLEPLACES
-      })
-    } else {
-      res.render('home', {googleApi: process.env.GOOGLEPLACES});
-    }
+    return next();
   }
 });
 
-let placeId;
-let venues = [];
+//////////////////////////////// PRIVATE ROUTES ////////////////////////////////
+// Only logged in users can see these routes
 
-router.post('/info', function(req, res) {
+/* HOME PAGE where you can enter your search */
+router.get('/', function(req, res, next) {
+  req.session.search = req.session.search || [];
   if (req.session.search.length > 0) {
     res.render('list', {
       venues: req.session.search,
       googleApi: process.env.GOOGLEPLACES
-    });
+    })
+  } else {
+    res.render('home', {googleApi: process.env.GOOGLEPLACES});
+  }
+});
+
+/* VENUES creates session venues */
+router.post('/info', function(req, res) {
+  if (req.session.search && req.session.search.length > 0) {
+    res.render('list', {
+      venues: req.session.search,
+      googleApi: process.env.GOOGLEPLACES
+    })
   } else {
     var options = {
       provider: 'google',
@@ -44,6 +54,8 @@ router.post('/info', function(req, res) {
       apiKey: process.env.GOOGLEPLACES
     };
     var geocoder = NodeGeocoder(options);
+    let placeId;
+    let venues = [];
     let lat;
     let long;
     geocoder.geocode(req.body.location).then(function(response) {
@@ -91,30 +103,49 @@ router.post('/info', function(req, res) {
   }
 })
 
+// router.get('allVenues', function(req, res) {
+//   res.render('list', {
+//     venues: req.session.search,
+//     googleApi: process.env.GOOGLEPLACES
+//   });
+// })
+
+/* REFRESH allows you to restart your search */
 router.get('/refresh', function(req, res) {
-  req.session.search = [];
+  delete req.session.search;
   res.redirect('/');
 })
 
-router.get('/venue/:venueName', function(req, res) {
-  var name = req.params.venueName;
+/* NEW SEARCH goes here after search within venues is pinged*/
+router.post('/newSearch', function(req, res) {
+  delete req.session.search;
+  res.redirect(307, '/info');
+})
+
+/* INDIVIDUAL VENUE can see more information about one venue */
+router.get('/venue', function(req, res) {
+  var venueName = req.query.name;
+  var address = req.query.address;
   req.session.search.forEach(venue => {
-    if (venue.name === name) {
+    if (venue.name === venueName && venue.address === address) {
       res.render('venue', {venue});
     }
   })
 })
 
-router.post('/venue/:venueName', function(req, res) {
-  console.log("cart registered");
-})
+// /* INDIVIDUAL VENUE can see more information about one venue */
+// router.post('/venue/:venueName', function(req, res) {
+//   console.log("cart registered");
+// })
 
-router.post('/cart/:venueName', function(req, res) {
+/* ADD TO CART adds the speicifc venue to your cart */
+router.post('/cart', function(req, res) {
+  var venueName = req.query.name;
+  var address = req.query.address;
   User.findById(req.user._id).populate('cart').exec(function(err, user) {
     req.session.search.forEach(venue => {
-      if (venue.name === req.params.venueName) {
+      if (venue.name === venueName && venue.address === address) {
         var cart = user.cart;
-        console.log(cart);
         Cart.findById(cart._id, function(err, foundCart) {
           cart.venues.push(venue);
           cart.save(function(err, savedCart) {
@@ -126,128 +157,117 @@ router.post('/cart/:venueName', function(req, res) {
   })
 })
 
+/* SHOW CART shows all items in cart*/
 router.get('/showCart', function(req, res) {
   User.findById(req.user._id).populate('cart').exec(function(err, user) {
     res.render('cart', {venues: user.cart.venues})
   })
 })
 
-router.post('/remove/:venueName', function(req, res) {
-  User.findById(req.user._id).populate('cart').exec(function(err, user) {
-    Cart.findById(user.cart._id, function(err, foundCart) {
+/* REMOVE a specific venue from the cart*/
+router.post('/remove', function(req, res) {
+  var venueName = req.query.name;
+  var address = req.query.address;
+  User.findById(req.user._id).exec(function(err, user) {
+    Cart.findById(user.cart, function(err, foundCart) {
       let index;
       foundCart.venues.forEach((venueObject, i) => {
-        if (venueObject.name === req.params.venueName) {
+        if (venueObject.name === venueName && venueObject.address === address) {
           index = i;
         }
       })
       foundCart.venues.splice(index, 1);
       foundCart.save(function(err, savedCart) {
-        res.render('cart', {venues: foundCart});
+        user.save(function(error, savedUser) {
+          res.redirect('/showCart');
+        })
       })
     })
   })
 })
 
+/* WISHLIST is the link tot he questionnaire*/
 router.get('/wishlist', function(req, res, next) {
   res.render('wishlist');
 })
 
+/* SUBMIT WISHLIST we will now send an email to venues*/
 router.post('/wishlist', function(req, res) {
   //Cart.findById(req.user.cart, function(foundCart) {
   // for (var i = 0; i < 1; i++) {
-  var nodemailer = require('nodemailer');
-
-  var content = `Hello from Festiv!\n
-    Our client, ${req.user.fname}, is interested in booking your venue for my upcoming event.
-    ${req.user.fname} would like to inquire about scheduling an event on ${req.body.date}
-    for ${req.body.hours} hours, for approximately ${req.body.guestCount} guests.
-    In terms of pricing, our client would prefer ${req.body.price}. Please let me know
-    of any packages or potential prices for the event.
-    \n
-    Looking forward to hearing back from you!\n\n
-    Best,
-    Festiv
-    festivspaces@gmail.com`;
-  var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'festivspaces@gmail.com',
-      pass: 'bookfestiv6'
+  // var nodemailer = require('nodemailer');
+  //
+  // var content = `Hello from Festiv!\n
+  //   Our client, ${req.user.fname}, is interested in booking your venue for my upcoming event.
+  //   ${req.user.fname} would like to inquire about scheduling an event on ${req.body.date}
+  //   for ${req.body.hours} hours, for approximately ${req.body.guestCount} guests.
+  //   In terms of pricing, our client would prefer ${req.body.price}. Please let me know
+  //   of any packages or potential prices for the event.
+  //   \n
+  //   Looking forward to hearing back from you!\n\n
+  //   Best,
+  //   Festiv
+  //   festivspaces@gmail.com`;
+  // var transporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  //   auth: {
+  //     user: 'festivspaces@gmail.com',
+  //     pass: 'bookfestiv6'
+  //   }
+  // });
+  //
+  // var mailOptions = {
+  //   from: 'festivspaces@gmail.com',
+  //   to: 'jtomli@seas.upenn.edu',
+  //   subject: req.user.fname + " would like to book your venue!",
+  //   text: content
+  // };
+  //
+  // transporter.sendMail(mailOptions, function(error, info) {
+  //   if (error) {
+  //     console.log(error);
+  //   } else {
+  //     console.log('Email sent: ' + info.response);
+  //   }
+  //  });
+  var request = sg.emptyRequest({
+    method: 'POST',
+    path: '/v3/mail/send',
+    body: {
+      personalizations: [
+        {
+          to: [
+            {
+              email: 'jamie.tomlinson11@gmail.com'
+            }
+          ],
+          'substitutions': {
+            '-businessName-': 'tester businesss',
+            '-fname-': req.user.fname,
+            '-date-': req.body.date,
+            '-guestCount-': req.body.guestCount,
+            '-price-': req.body.price,
+            '-hours-': req.body.hours
+          },
+          subject: req.user.fname + " would like to book your venue with Festiv!"
+        }
+      ],
+      from: {
+        email: 'festivspaces@gmail.com'
+      },
+      template_id: process.env.TEMPLATE_ID
     }
   });
-
-  var mailOptions = {
-    from: 'festivspaces@gmail.com',
-    to: 'jtomli@seas.upenn.edu',
-    subject: req.user.fname + " would like to book your venue!",
-    text: content
-  };
-
-  transporter.sendMail(mailOptions, function(error, info) {
+  sg.API(request, function(error, response) {
     if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
+      console.log('Error response received');
     }
-    //  });
-    // var request = sg.emptyRequest({
-    //   method: 'POST',
-    //   path: '/v3/mail/send',
-    //   body: {
-    //     personalizations: [
-    //       {
-    //         to: [
-    //           {
-    //             email: cart.venues[i].email || 'jamie.tomlinson11@gmail.com'
-    //           }
-    //         ],
-    //         'substitutions': {
-    //           '-businessName-': cart.venues[i].name,
-    //           '-fname': req.user.fname,
-    //           '-date-': req.body.date,
-    //           '-guests': req.body.guestCount,
-    //           '-price': req.body.price
-    //         },
-    //         subject: req.user.fname + " would like to book your venue!"
-    //       }
-    //     ],
-    //     from: {
-    //       email: 'test@example.com'
-    //     },
-    //     'template_id': process.env.TEMPLATE_ID
-    //   }
-    // });
-    // sg.API(request, function(error, response) {
-    //   if (error) {
-    //     console.log('Error response received');
-    //   }
-    //   console.log(response.statusCode);
-    //   console.log(response.body);
-    //   console.log(response.headers);
-    // });
-    //  }
-    res.redirect('/');
-  })
-
+    console.log(response.statusCode);
+    console.log(response.body);
+    console.log(response.headers);
+    res.redirect('/refresh');
+  });
 })
-
-///////////////////////////// END OF PUBLIC ROUTES /////////////////////////////
-
-router.use(function(req, res, next) {
-  if (!req.user) {
-    res.redirect('/login');
-  } else {
-    return next();
-  }
-});
-
-//////////////////////////////// PRIVATE ROUTES ////////////////////////////////
-// Only logged in users can see these routes
-
-router.get('/protected', function(req, res, next) {
-  res.render('protectedRoute', {username: req.user.username});
-});
 
 ///////////////////////////// END OF PRIVATE ROUTES /////////////////////////////
 
