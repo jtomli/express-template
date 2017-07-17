@@ -32,7 +32,6 @@ let placeId;
 let venues = [];
 
 router.post('/info', function(req, res) {
-  console.log("search", req.session);
   if (req.session.search.length > 0) {
     res.render('list', {
       venues: req.session.search,
@@ -115,6 +114,7 @@ router.post('/cart/:venueName', function(req, res) {
     req.session.search.forEach(venue => {
       if (venue.name === req.params.venueName) {
         var cart = user.cart;
+        console.log(cart);
         Cart.findById(cart._id, function(err, foundCart) {
           cart.venues.push(venue);
           cart.save(function(err, savedCart) {
@@ -128,7 +128,6 @@ router.post('/cart/:venueName', function(req, res) {
 
 router.get('/showCart', function(req, res) {
   User.findById(req.user._id).populate('cart').exec(function(err, user) {
-    console.log(user.cart.venues);
     res.render('cart', {venues: user.cart.venues})
   })
 })
